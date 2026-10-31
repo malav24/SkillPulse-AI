@@ -1,0 +1,7 @@
+# Optional: semantic skill matching with a local embedding model.
+# Without these the pipeline still works (dictionary + alias + TF-IDF fuzzy matching).
+# Installs PyTorch (~700 MB+). The model (~90 MB) downloads on first use, then runs offline.
+sentence-transformers==4.1.0
+# Optional: full spaCy English model for noun-chunk candidate phrases:
+#   python -m spacy download en_core_web_sm
+pyarrow>=18.1    # only for scripts/build_latest_datasets.py (reads the LinkedIn Parquet files)

@@ -1,0 +1,31 @@
+# --- installed packages (recreated by setup.bat / setup.sh) ---
+.venv/
+backend/.venv/
+frontend/node_modules/
+
+# --- build output / caches ---
+frontend/dist/
+frontend/tsconfig.tsbuildinfo
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# --- local data (each person has their own) ---
+# SQLite database + uploaded PDFs
+backend/storage/
+# local settings (each person copies .env.example to .env)
+backend/.env
+# made by train_models.bat before retraining
+backend/artifacts_backup/
+
+# --- uncompressed copies of the datasets (the repo keeps the .csv.gz versions) ---
+backend/data/market/*.csv
+
+# --- personal files ---
+*.zip
+# PDFs in the top folder (shared test syllabi go in sample_data/)
+/*.pdf
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

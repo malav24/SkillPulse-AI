@@ -1,0 +1,9 @@
+university_name,university_type,state,district,official_website,source_url,verified_identifier,identifier_source,programme_name,degree,branch,specialization,academic_level,institution,duration_years
+Example Technological University (TEST DATA),state,Gujarat,Vadodara,https://example.edu.in,https://example.edu.in/about,,,B.Tech Computer Science,B.Tech,Computer Science and Engineering,,UG,,4
+Example Technological University (TEST DATA),state,Gujarat,Vadodara,https://example.edu.in,,,,M.Tech Data Science,M.Tech,Computer Science,Data Science,PG,,2
+Sample Institute of Science (TEST DATA),deemed,Karnataka,Bengaluru,https://sample-institute.ac.in,,,,MCA,MCA,Computer Applications,,postgraduate,,2
+Invalid State University (TEST DATA),state,Atlantis,,https://invalid.example.in,,,,,,,,,,
+Bad Website University (TEST DATA),private,Kerala,,not-a-url,,,,BBA,BBA,Management,,undergraduate,,3
+,state,Gujarat,,,,,,,,,,,,
+Example Technological University (TEST DATA),state,Gujarat,Vadodara,https://example.edu.in,https://example.edu.in/about,,,B.Tech Computer Science,B.Tech,Computer Science and Engineering,,UG,,4
+Bad Level University (TEST DATA),central,Delhi,,,,,,PhD CS,PhD,CS,,postdoc,,

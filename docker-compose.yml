@@ -1,0 +1,34 @@
+# Production-like stack: PostgreSQL + FastAPI (with Tesseract) + Nginx-served frontend.
+# Usage:  docker compose up --build   then open http://localhost:8080
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: skillpulse
+      POSTGRES_PASSWORD: skillpulse
+      POSTGRES_DB: skillpulse
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U skillpulse"]
+      interval: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg2://skillpulse:skillpulse@db:5432/skillpulse
+      UPLOAD_DIR: /app/storage/uploads
+      SEMANTIC_ENABLED: "false"
+    volumes: [uploads:/app/storage/uploads]
+    depends_on:
+      db: { condition: service_healthy }
+    ports: ["8000:8000"]
+
+  frontend:
+    build: ./frontend
+    depends_on: [backend]
+    ports: ["8080:80"]
+
+volumes:
+  pgdata:
+  uploads:

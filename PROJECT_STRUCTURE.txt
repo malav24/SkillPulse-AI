@@ -1,0 +1,137 @@
+SKILLPULSE AI - WHERE EVERYTHING IS
+===================================
+
+Repository : https://github.com/malav24/SkillPulse-AI
+What it does: a faculty member uploads a syllabus PDF; the app finds the courses and skills in it, compares
+             them with 1.3 lakh real job postings using 3 trained machine-learning models, and recommends
+             which skills to add or strengthen.
+
+
+1. HOW TO RUN (WINDOWS)
+-----------------------
+  Needs once : Python 3.12 (3.11 / 3.13 also work)  https://www.python.org/downloads/
+               Node.js 20 LTS                        https://nodejs.org/
+               Git                                   https://git-scm.com/
+
+  setup.bat          Run ONCE. Creates backend\.venv, installs Python + Node packages (~7 minutes).
+  start.bat          Starts the app and opens http://localhost:5173 in the browser.
+  train_models.bat   (Optional) Retrains all 3 ML models from the datasets (~10 minutes).
+  run_tests.bat      (Optional) Runs all automated tests.
+  push_to_github.bat Pushes the project to GitHub (only the repo owner needs this).
+
+  macOS / Linux: bash setup.sh  ->  bash start.sh   (bash train_models.sh to retrain)
+
+  Try it: upload  sample_data\JNTUH_R22_BTech_CSE_AIML_II_Year_Syllabus.pdf
+
+
+2. DATASETS  (backend\data\market\)
+-----------------------------------
+  File                       Rows     Size     What it is
+  job_postings_2025.csv.gz   97,929   20 MB    Indian job postings (Naukri.com, collected ~3 Oct 2025):
+                                               title, company, FULL job description, skill tags,
+                                               experience, salary, location, posting date
+  job_postings_2024.csv.gz   40,000    4 MB    LinkedIn job postings, Jan 2024 (10,000 each from US, UK,
+                                               Canada, Australia): title, country, seniority, skill list
+  ---------------------------------------------------------------------------------------------------
+  Total                     137,929            after removing 7,640 exact duplicates: 130,289 postings
+
+  - Compressed CSV (.csv.gz): pandas reads them directly; to look at them, unzip with 7-Zip / WinRAR
+    or run:  python -c "import pandas as pd; print(pd.read_csv('backend/data/market/job_postings_2025.csv.gz').head())"
+  - Used ONLY for training (python -m ml.train_all). The running app uses the trained models in
+    backend\artifacts\ instead, which is why an analysis takes about 2 seconds.
+  - Sources (credit): Kaggle "shivamshrivastava21/indian-job-market-dataset-2025-2026" (licence not stated,
+    keep this repository PRIVATE) and Kaggle "asaniczka/1-3m-linkedin-jobs-and-skills-2024" (ODC-By 1.0).
+  - Rebuilt from the original downloads by: backend\scripts\build_latest_datasets.py
+
+  Other data files
+  backend\data\skill_taxonomy.json    188 skills + aliases (e.g. "ML" -> Machine Learning) used to find skills
+  backend\data\parsing_rules.json     rules for detecting courses, units, outcomes, labs in syllabus PDFs
+  sample_data\JNTUH_R22_BTech_CSE_AIML_II_Year_Syllabus.pdf   real 29-page syllabus for testing (19 courses)
+  backend\tests\fixtures\             small SYNTHETIC test PDFs (normal, scanned, blank, corrupted)
+
+
+3. TRAINED MODELS  (backend\artifacts\)
+--------------------------------------
+  Created by:  python -m ml.train_all   (train_models.bat).  Loaded by the app at start-up.
+
+  File                         Size    Model
+  role_model.joblib            22 MB   MODEL 1 - Job-role classifier: TF-IDF + Linear SVM (calibrated)
+                                       11 classes (Data Scientist/ML, Data Engineer, Data Analyst, DevOps/Cloud,
+                                       Cybersecurity, QA, Mobile, Web/Full Stack, Software Developer, Network,
+                                       Other). Test accuracy 86.6 %, macro-F1 0.673 (71,688 train / 17,923 test)
+  requirement_model.joblib      2 MB   MODEL 2 - Requirement-level classifier: TF-IDF + Linear SVM
+                                       3 classes (required / preferred / neutral sentence).
+                                       Test accuracy 59.1 %, macro-F1 0.567 (117,564 train / 29,392 test)
+  recommender.json            0.3 MB   MODEL 3 - Skill recommender: 1,939 Apriori association rules +
+                                       12 K-Means skill bundles (k chosen by silhouette score)
+  market_levels.npz           0.5 MB   pre-processed market: 130,289 postings x 188 skills
+                                       (0 none, 1 preferred, 2 unspecified, 3 required)
+  market_meta.json.gz         1.2 MB   per posting: predicted job role, minimum experience, year, title
+  metrics.json                 40 KB   every evaluation number: accuracy, precision, recall, F1, confusion
+                                       matrices, algorithm comparison, rules, clusters, data-pipeline counts
+                                       (shown on the "ML models" page of the app)
+
+  Algorithms compared for Models 1 and 2: majority baseline, Naive Bayes, Logistic Regression,
+  Linear SVM (selected), Random Forest.
+
+
+4. CODE  (and which team member owns it)
+----------------------------------------
+  backend\                                   Python, FastAPI
+    ml\                                      TRAINING (offline)
+      common.py              [Member 2]      load + clean datasets, remove duplicates, job-role labels
+      requirement_classifier.py [Member 2]   MODEL 2
+      evaluation.py          [Member 2]      accuracy, precision, recall, F1, confusion matrix
+      role_classifier.py     [Member 1]      MODEL 1
+      skill_recommender.py   [Member 3]      MODEL 3 (Apriori + K-Means)
+      pipeline_report.py     [Member 2]      data-pipeline numbers for the ML models page
+      train_all.py           [all]           runs everything, writes backend\artifacts\
+    app\                                     THE WEB APP (API)
+      main.py                                start-up: database, models, background worker
+      routers\faculty.py                     API endpoints (/api/analyses, /api/market, /api/models)
+      services\pdf_processing.py [Member 1]  PDF text + OCR for scanned PDFs
+      services\structure_parser.py [Member 1] courses, units, outcomes, labs
+      services\pipeline.py   [Member 1]      runs the PDF steps
+      services\skill_extractor.py [Member 1] finds skills in syllabus text (with evidence)
+      services\job_skills.py, job_import.py [Member 2]  job-ad text helpers used in training
+      services\market_model.py [Member 2]    loads the trained models (backend\artifacts\)
+      services\comparison.py [Member 3]      coverage, demand, gap, roles, bundles, recommendations
+      services\faculty.py    [Member 3]      upload -> analyse -> store result
+      models.py, database.py, config.py      database tables and settings
+    alembic\                                 database migrations (run automatically)
+    tests\                                   42 automated tests
+    requirements.txt                         Python packages (requirements-dev.txt adds test tools)
+    .env.example                             settings template (setup copies it to .env)
+
+  frontend\                                  React + TypeScript + Plotly   [Member 3]
+    src\pages\Home.tsx                       upload form + previous analyses
+    src\pages\Analysis.tsx                   results, recommendations, charts
+    src\pages\Models.tsx                     "ML models" page: training pipeline + accuracy
+    src\components\Plot.tsx                  Plotly chart wrapper
+    package.json                             Node packages
+
+
+5. FILES CREATED WHEN YOU RUN IT  (not in GitHub - each person has their own)
+-----------------------------------------------------------------------------
+  backend\.venv\              Python packages        (setup.bat)
+  frontend\node_modules\      Node packages          (setup.bat)
+  backend\.env                local settings         (setup.bat copies .env.example)
+  backend\storage\skillpulse.db   SQLite database: your uploaded syllabi and analysis results
+  backend\storage\uploads\    the uploaded PDFs
+  backend\artifacts_backup\   previous models        (train_models.bat)
+
+
+6. PORTS / ADDRESSES
+--------------------
+  App (frontend)     http://localhost:5173
+  API (backend)      http://localhost:8000      API docs: http://localhost:8000/docs
+
+
+7. COMMON PROBLEMS
+------------------
+  "python is not recognized"      Install Python 3.12 and tick "Add python.exe to PATH", then run setup.bat again.
+  "npm is not recognized"         Install Node.js 20 LTS, close and reopen the window, run setup.bat again.
+  Charts blank / page looks old   Press Ctrl + F5 in the browser.
+  "Trained models not found"      backend\artifacts\ is missing: pull the repo again or run train_models.bat.
+  Port 8000 or 5173 already used  Close the other SkillPulse windows (or restart the computer).
+  Training seems stuck            Do not click inside the training window (Windows pauses it); press Enter once.

@@ -1,0 +1,2542 @@
+{
+  "version": "1.1.0",
+  "description": "Sample SkillPulse skill taxonomy. Edit freely: add skills, aliases, case_sensitive acronyms and context_terms (an alias with context_terms only maps confidently when one of those words appears near the match; ambiguity_policy 'skip' drops unsupported matches, 'flag' keeps them as ambiguous).",
+  "categories": {
+    "programming_language": "Programming languages",
+    "framework_library": "Frameworks & libraries",
+    "database": "Databases",
+    "cloud_devops": "Cloud & DevOps",
+    "tool_platform": "Tools & platforms",
+    "data_ai": "Data science & AI",
+    "cs_fundamentals": "Computer science fundamentals",
+    "method_technique": "Methods & techniques",
+    "security": "Security",
+    "networking": "Networking",
+    "web_mobile": "Web & mobile",
+    "professional_competency": "Professional competencies",
+    "mathematics_statistics": "Mathematics & statistics",
+    "engineering_domain": "Engineering domain"
+  },
+  "skills": [
+    {
+      "name": "Python",
+      "category": "programming_language",
+      "description": "Python programming language",
+      "aliases": [
+        "python3",
+        "python programming"
+      ]
+    },
+    {
+      "name": "Java",
+      "category": "programming_language",
+      "description": "Java programming language",
+      "aliases": [
+        "core java",
+        "java programming",
+        {
+          "alias": "J2EE",
+          "case_sensitive": true
+        },
+        {
+          "alias": "JDK",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "C Programming",
+      "category": "programming_language",
+      "description": "The C programming language",
+      "aliases": [
+        "c language",
+        "programming in c",
+        {
+          "alias": "C",
+          "case_sensitive": true,
+          "context_terms": [
+            "programming",
+            "language",
+            "program",
+            "compiler",
+            "code",
+            "coding",
+            "syntax",
+            "pointer",
+            "pointers",
+            "function",
+            "functions"
+          ],
+          "ambiguity_policy": "skip"
+        },
+        "ANSI C"
+      ]
+    },
+    {
+      "name": "C++",
+      "category": "programming_language",
+      "description": "The C++ programming language",
+      "aliases": [
+        "cpp",
+        "c plus plus",
+        "object oriented programming with c++"
+      ]
+    },
+    {
+      "name": "C#",
+      "category": "programming_language",
+      "description": "The C# programming language",
+      "aliases": [
+        "c sharp",
+        "csharp"
+      ]
+    },
+    {
+      "name": "JavaScript",
+      "category": "programming_language",
+      "description": "JavaScript programming language",
+      "aliases": [
+        "java script",
+        "ecmascript",
+        {
+          "alias": "JS",
+          "case_sensitive": true,
+          "context_terms": [
+            "web",
+            "html",
+            "css",
+            "node",
+            "browser",
+            "script",
+            "frontend"
+          ],
+          "ambiguity_policy": "flag"
+        },
+        {
+          "alias": "ES6",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "TypeScript",
+      "category": "programming_language",
+      "description": "TypeScript language",
+      "aliases": []
+    },
+    {
+      "name": "R Programming",
+      "category": "programming_language",
+      "description": "R language for statistical computing",
+      "aliases": [
+        "r language",
+        "r programming",
+        "programming in r",
+        {
+          "alias": "R",
+          "case_sensitive": true,
+          "context_terms": [
+            "programming",
+            "language",
+            "statistical",
+            "rstudio",
+            "ggplot",
+            "data analysis",
+            "cran",
+            "statistics"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Go (Golang)",
+      "category": "programming_language",
+      "description": "Go programming language",
+      "aliases": [
+        "golang",
+        {
+          "alias": "Go",
+          "case_sensitive": true,
+          "context_terms": [
+            "language",
+            "golang",
+            "goroutine",
+            "goroutines",
+            "programming"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Rust",
+      "category": "programming_language",
+      "description": "Rust programming language",
+      "aliases": [
+        {
+          "alias": "Rust",
+          "case_sensitive": true,
+          "context_terms": [
+            "programming",
+            "language",
+            "cargo",
+            "ownership",
+            "memory safety"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Kotlin",
+      "category": "programming_language",
+      "description": "Kotlin",
+      "aliases": []
+    },
+    {
+      "name": "Swift",
+      "category": "programming_language",
+      "description": "Swift programming language",
+      "aliases": [
+        {
+          "alias": "Swift",
+          "case_sensitive": true,
+          "context_terms": [
+            "ios",
+            "apple",
+            "xcode",
+            "programming",
+            "language"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "PHP",
+      "category": "programming_language",
+      "description": "PHP language",
+      "aliases": [
+        {
+          "alias": "PHP",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Ruby",
+      "category": "programming_language",
+      "description": "Ruby language",
+      "aliases": [
+        {
+          "alias": "Ruby",
+          "case_sensitive": true,
+          "context_terms": [
+            "rails",
+            "programming",
+            "language",
+            "gem"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Scala",
+      "category": "programming_language",
+      "description": "Scala",
+      "aliases": []
+    },
+    {
+      "name": "MATLAB",
+      "category": "programming_language",
+      "description": "MATLAB numerical computing",
+      "aliases": [
+        "matlab",
+        {
+          "alias": "Octave",
+          "case_sensitive": true,
+          "context_terms": [
+            "matlab",
+            "gnu",
+            "numerical"
+          ],
+          "ambiguity_policy": "flag"
+        }
+      ]
+    },
+    {
+      "name": "Shell Scripting",
+      "category": "programming_language",
+      "description": "Unix shell / Bash scripting",
+      "aliases": [
+        "bash",
+        "bash scripting",
+        "shell script",
+        "shell scripts",
+        "shell programming",
+        "unix shell"
+      ]
+    },
+    {
+      "name": "Assembly Language",
+      "category": "programming_language",
+      "description": "Assembly language programming",
+      "aliases": [
+        "assembly language programming",
+        "assembler",
+        "8086 assembly",
+        "alp"
+      ]
+    },
+    {
+      "name": "Verilog",
+      "category": "programming_language",
+      "description": "Verilog hardware description language",
+      "aliases": [
+        "verilog hdl"
+      ]
+    },
+    {
+      "name": "VHDL",
+      "category": "programming_language",
+      "description": "VHDL hardware description language",
+      "aliases": [
+        {
+          "alias": "VHDL",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Dart",
+      "category": "programming_language",
+      "description": "Dart language",
+      "aliases": [
+        {
+          "alias": "Dart",
+          "case_sensitive": true,
+          "context_terms": [
+            "flutter",
+            "language",
+            "programming"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Perl",
+      "category": "programming_language",
+      "description": "Perl language",
+      "aliases": [
+        {
+          "alias": "Perl",
+          "case_sensitive": true,
+          "context_terms": [
+            "script",
+            "programming",
+            "language"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Fortran",
+      "category": "programming_language",
+      "description": "Fortran",
+      "aliases": []
+    },
+    {
+      "name": "COBOL",
+      "category": "programming_language",
+      "description": "COBOL",
+      "aliases": [
+        {
+          "alias": "COBOL",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Solidity",
+      "category": "programming_language",
+      "description": "Solidity smart-contract language",
+      "aliases": []
+    },
+    {
+      "name": "HTML",
+      "category": "web_mobile",
+      "description": "HyperText Markup Language",
+      "aliases": [
+        {
+          "alias": "HTML",
+          "case_sensitive": true
+        },
+        "html5",
+        "hypertext markup language"
+      ]
+    },
+    {
+      "name": "CSS",
+      "category": "web_mobile",
+      "description": "Cascading Style Sheets",
+      "aliases": [
+        {
+          "alias": "CSS",
+          "case_sensitive": true
+        },
+        "css3",
+        "cascading style sheets"
+      ]
+    },
+    {
+      "name": "React",
+      "category": "framework_library",
+      "description": "React JavaScript library",
+      "aliases": [
+        "react.js",
+        "reactjs",
+        "react js",
+        {
+          "alias": "React",
+          "case_sensitive": true,
+          "context_terms": [
+            "javascript",
+            "component",
+            "components",
+            "jsx",
+            "hooks",
+            "frontend",
+            "web",
+            "redux",
+            "native"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Angular",
+      "category": "framework_library",
+      "description": "Angular framework",
+      "aliases": [
+        "angularjs",
+        "angular.js",
+        {
+          "alias": "Angular",
+          "case_sensitive": true,
+          "context_terms": [
+            "typescript",
+            "framework",
+            "component",
+            "web",
+            "frontend"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Vue.js",
+      "category": "framework_library",
+      "description": "Vue.js framework",
+      "aliases": [
+        "vuejs",
+        "vue js",
+        {
+          "alias": "Vue",
+          "case_sensitive": true,
+          "context_terms": [
+            "javascript",
+            "framework",
+            "component",
+            "web"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Node.js",
+      "category": "framework_library",
+      "description": "Node.js runtime",
+      "aliases": [
+        "nodejs",
+        "node js",
+        {
+          "alias": "Node",
+          "case_sensitive": true,
+          "context_terms": [
+            "javascript",
+            "npm",
+            "express",
+            "server",
+            "runtime"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Express.js",
+      "category": "framework_library",
+      "description": "Express web framework",
+      "aliases": [
+        "expressjs",
+        "express js"
+      ]
+    },
+    {
+      "name": "Django",
+      "category": "framework_library",
+      "description": "Django",
+      "aliases": []
+    },
+    {
+      "name": "Flask",
+      "category": "framework_library",
+      "description": "Flask web framework",
+      "aliases": [
+        {
+          "alias": "Flask",
+          "case_sensitive": true,
+          "context_terms": [
+            "python",
+            "web",
+            "framework",
+            "api",
+            "route"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "FastAPI",
+      "category": "framework_library",
+      "description": "FastAPI",
+      "aliases": []
+    },
+    {
+      "name": "Spring Framework",
+      "category": "framework_library",
+      "description": "Spring / Spring Boot",
+      "aliases": [
+        "spring boot",
+        "spring mvc",
+        {
+          "alias": "Spring",
+          "case_sensitive": true,
+          "context_terms": [
+            "java",
+            "boot",
+            "framework",
+            "mvc",
+            "bean",
+            "beans",
+            "hibernate"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Hibernate",
+      "category": "framework_library",
+      "description": "Hibernate ORM",
+      "aliases": [
+        {
+          "alias": "Hibernate",
+          "case_sensitive": true,
+          "context_terms": [
+            "java",
+            "orm",
+            "jpa",
+            "spring"
+          ],
+          "ambiguity_policy": "skip"
+        },
+        {
+          "alias": "JPA",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "ASP.NET",
+      "category": "framework_library",
+      "description": ".NET web framework",
+      "aliases": [
+        "asp.net core",
+        "asp net"
+      ]
+    },
+    {
+      "name": ".NET",
+      "category": "framework_library",
+      "description": ".NET platform",
+      "aliases": [
+        ".net framework",
+        ".net core",
+        "dotnet"
+      ]
+    },
+    {
+      "name": "Laravel",
+      "category": "framework_library",
+      "description": "Laravel",
+      "aliases": []
+    },
+    {
+      "name": "Bootstrap",
+      "category": "framework_library",
+      "description": "Bootstrap CSS framework",
+      "aliases": [
+        {
+          "alias": "Bootstrap",
+          "case_sensitive": true,
+          "context_terms": [
+            "css",
+            "responsive",
+            "html",
+            "web",
+            "framework"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Tailwind CSS",
+      "category": "framework_library",
+      "description": "Tailwind CSS",
+      "aliases": []
+    },
+    {
+      "name": "jQuery",
+      "category": "framework_library",
+      "description": "jQuery",
+      "aliases": [
+        "jquery"
+      ]
+    },
+    {
+      "name": "REST APIs",
+      "category": "web_mobile",
+      "description": "Designing and consuming RESTful web services",
+      "aliases": [
+        "rest api",
+        "restful",
+        "restful api",
+        "restful services",
+        "rest services",
+        "web services",
+        "web api",
+        {
+          "alias": "REST",
+          "case_sensitive": true,
+          "context_terms": [
+            "api",
+            "apis",
+            "service",
+            "services",
+            "web",
+            "http"
+          ],
+          "ambiguity_policy": "flag"
+        }
+      ]
+    },
+    {
+      "name": "GraphQL",
+      "category": "web_mobile",
+      "description": "GraphQL",
+      "aliases": []
+    },
+    {
+      "name": "Android Development",
+      "category": "web_mobile",
+      "description": "Android app development",
+      "aliases": [
+        "android",
+        "android studio",
+        "android app development",
+        "android application development"
+      ]
+    },
+    {
+      "name": "iOS Development",
+      "category": "web_mobile",
+      "description": "iOS app development",
+      "aliases": [
+        {
+          "alias": "iOS",
+          "case_sensitive": true,
+          "context_terms": [
+            "app",
+            "apps",
+            "mobile",
+            "apple",
+            "swift",
+            "xcode",
+            "development"
+          ],
+          "ambiguity_policy": "flag"
+        }
+      ]
+    },
+    {
+      "name": "Flutter",
+      "category": "framework_library",
+      "description": "Flutter",
+      "aliases": []
+    },
+    {
+      "name": "React Native",
+      "category": "framework_library",
+      "description": "React Native",
+      "aliases": []
+    },
+    {
+      "name": "Web Development",
+      "category": "web_mobile",
+      "description": "Building web applications",
+      "aliases": [
+        "web technology",
+        "web technologies",
+        "web programming",
+        "web application development",
+        "full stack development",
+        "full-stack"
+      ]
+    },
+    {
+      "name": "Mobile Application Development",
+      "category": "web_mobile",
+      "description": "Building mobile applications",
+      "aliases": [
+        "mobile app development",
+        "mobile computing",
+        "mobile application"
+      ]
+    },
+    {
+      "name": "XML",
+      "category": "web_mobile",
+      "description": "Extensible Markup Language",
+      "aliases": [
+        {
+          "alias": "XML",
+          "case_sensitive": true
+        },
+        "extensible markup language"
+      ]
+    },
+    {
+      "name": "JSON",
+      "category": "web_mobile",
+      "description": "JSON data format",
+      "aliases": [
+        {
+          "alias": "JSON",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "AJAX",
+      "category": "web_mobile",
+      "description": "Asynchronous JavaScript and XML",
+      "aliases": [
+        {
+          "alias": "AJAX",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Servlets and JSP",
+      "category": "web_mobile",
+      "description": "Java Servlets and JSP",
+      "aliases": [
+        "servlet",
+        "servlets",
+        "jsp",
+        "java server pages"
+      ]
+    },
+    {
+      "name": "UI/UX Design",
+      "category": "web_mobile",
+      "description": "User interface and experience design",
+      "aliases": [
+        "ui design",
+        "ux design",
+        "user interface design",
+        "user experience",
+        "human computer interaction",
+        {
+          "alias": "HCI",
+          "case_sensitive": true
+        },
+        "usability"
+      ]
+    },
+    {
+      "name": "SQL",
+      "category": "database",
+      "description": "Structured Query Language",
+      "aliases": [
+        {
+          "alias": "SQL",
+          "case_sensitive": true
+        },
+        "structured query language"
+      ]
+    },
+    {
+      "name": "MySQL",
+      "category": "database",
+      "description": "MySQL",
+      "aliases": []
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "database",
+      "description": "PostgreSQL",
+      "aliases": [
+        "postgres"
+      ]
+    },
+    {
+      "name": "Oracle Database",
+      "category": "database",
+      "description": "Oracle DB",
+      "aliases": [
+        "oracle database",
+        "oracle db",
+        {
+          "alias": "PL/SQL",
+          "case_sensitive": true
+        },
+        {
+          "alias": "Oracle",
+          "case_sensitive": true,
+          "context_terms": [
+            "database",
+            "sql",
+            "pl/sql",
+            "dbms"
+          ],
+          "ambiguity_policy": "flag"
+        }
+      ]
+    },
+    {
+      "name": "MongoDB",
+      "category": "database",
+      "description": "MongoDB",
+      "aliases": []
+    },
+    {
+      "name": "NoSQL Databases",
+      "category": "database",
+      "description": "Non-relational databases",
+      "aliases": [
+        "nosql",
+        "no-sql",
+        "non-relational database"
+      ]
+    },
+    {
+      "name": "SQLite",
+      "category": "database",
+      "description": "SQLite",
+      "aliases": []
+    },
+    {
+      "name": "Redis",
+      "category": "database",
+      "description": "Redis",
+      "aliases": []
+    },
+    {
+      "name": "Cassandra",
+      "category": "database",
+      "description": "Apache Cassandra",
+      "aliases": [
+        {
+          "alias": "Cassandra",
+          "case_sensitive": true,
+          "context_terms": [
+            "database",
+            "nosql",
+            "apache"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Database Management Systems",
+      "category": "cs_fundamentals",
+      "description": "DBMS concepts",
+      "aliases": [
+        {
+          "alias": "DBMS",
+          "case_sensitive": true
+        },
+        {
+          "alias": "RDBMS",
+          "case_sensitive": true
+        },
+        "database management system",
+        "database management systems",
+        "relational database",
+        "relational databases",
+        "database systems"
+      ]
+    },
+    {
+      "name": "Database Normalization",
+      "category": "cs_fundamentals",
+      "description": "Database normalization",
+      "aliases": [
+        "normal forms",
+        "1nf",
+        "2nf",
+        "3nf",
+        "bcnf",
+        "database normalisation"
+      ]
+    },
+    {
+      "name": "Transaction Management",
+      "category": "cs_fundamentals",
+      "description": "Database transactions and concurrency control",
+      "aliases": [
+        "acid properties",
+        "concurrency control",
+        "transaction processing"
+      ]
+    },
+    {
+      "name": "Data Warehousing",
+      "category": "data_ai",
+      "description": "Data warehousing and OLAP",
+      "aliases": [
+        "data warehouse",
+        "data warehouses",
+        {
+          "alias": "OLAP",
+          "case_sensitive": true
+        },
+        {
+          "alias": "ETL",
+          "case_sensitive": true
+        },
+        "extract transform load"
+      ]
+    },
+    {
+      "name": "Amazon Web Services",
+      "category": "cloud_devops",
+      "description": "AWS cloud platform",
+      "aliases": [
+        {
+          "alias": "AWS",
+          "case_sensitive": true,
+          "context_terms": [
+            "cloud",
+            "ec2",
+            "s3",
+            "lambda",
+            "amazon",
+            "iam",
+            "deployment",
+            "services",
+            "vpc"
+          ],
+          "ambiguity_policy": "flag"
+        },
+        "amazon web services",
+        {
+          "alias": "EC2",
+          "case_sensitive": true
+        },
+        "amazon s3"
+      ]
+    },
+    {
+      "name": "Microsoft Azure",
+      "category": "cloud_devops",
+      "description": "Azure cloud",
+      "aliases": [
+        "azure",
+        {
+          "alias": "Azure",
+          "case_sensitive": true,
+          "context_terms": [
+            "cloud",
+            "microsoft",
+            "services"
+          ],
+          "ambiguity_policy": "flag"
+        }
+      ]
+    },
+    {
+      "name": "Google Cloud Platform",
+      "category": "cloud_devops",
+      "description": "GCP",
+      "aliases": [
+        {
+          "alias": "GCP",
+          "case_sensitive": true
+        },
+        "google cloud"
+      ]
+    },
+    {
+      "name": "Cloud Computing",
+      "category": "cloud_devops",
+      "description": "Cloud computing concepts",
+      "aliases": [
+        "cloud computing",
+        "cloud services",
+        {
+          "alias": "IaaS",
+          "case_sensitive": true
+        },
+        {
+          "alias": "PaaS",
+          "case_sensitive": true
+        },
+        {
+          "alias": "SaaS",
+          "case_sensitive": true
+        },
+        "cloud deployment",
+        "virtualization",
+        "virtualisation"
+      ]
+    },
+    {
+      "name": "Docker",
+      "category": "cloud_devops",
+      "description": "Container platform",
+      "aliases": [
+        "docker",
+        "containerization",
+        "containerisation",
+        "containers"
+      ]
+    },
+    {
+      "name": "Kubernetes",
+      "category": "cloud_devops",
+      "description": "Container orchestration",
+      "aliases": [
+        "k8s"
+      ]
+    },
+    {
+      "name": "DevOps",
+      "category": "cloud_devops",
+      "description": "DevOps practices",
+      "aliases": [
+        "devops",
+        "dev ops"
+      ]
+    },
+    {
+      "name": "CI/CD",
+      "category": "cloud_devops",
+      "description": "Continuous integration and delivery",
+      "aliases": [
+        "continuous integration",
+        "continuous delivery",
+        "continuous deployment",
+        "ci cd",
+        {
+          "alias": "CI/CD",
+          "case_sensitive": true
+        },
+        "jenkins",
+        "github actions"
+      ]
+    },
+    {
+      "name": "Git",
+      "category": "tool_platform",
+      "description": "Git version control",
+      "aliases": [
+        {
+          "alias": "Git",
+          "case_sensitive": true
+        },
+        "github",
+        "gitlab",
+        "version control",
+        "version control system"
+      ]
+    },
+    {
+      "name": "Linux",
+      "category": "tool_platform",
+      "description": "Linux operating system",
+      "aliases": [
+        "linux",
+        "unix",
+        "ubuntu"
+      ]
+    },
+    {
+      "name": "Microsoft Excel",
+      "category": "tool_platform",
+      "description": "Spreadsheets with Excel",
+      "aliases": [
+        "ms excel",
+        "microsoft excel",
+        "spreadsheet",
+        "spreadsheets",
+        {
+          "alias": "Excel",
+          "case_sensitive": true,
+          "context_terms": [
+            "spreadsheet",
+            "microsoft",
+            "ms",
+            "pivot",
+            "formula",
+            "formulas",
+            "worksheet",
+            "chart"
+          ],
+          "ambiguity_policy": "flag"
+        }
+      ]
+    },
+    {
+      "name": "Power BI",
+      "category": "tool_platform",
+      "description": "Microsoft Power BI",
+      "aliases": [
+        "powerbi"
+      ]
+    },
+    {
+      "name": "Tableau",
+      "category": "tool_platform",
+      "description": "Tableau",
+      "aliases": []
+    },
+    {
+      "name": "Jupyter Notebook",
+      "category": "tool_platform",
+      "description": "Jupyter",
+      "aliases": [
+        "jupyter",
+        "jupyter notebooks",
+        "google colab",
+        "colab"
+      ]
+    },
+    {
+      "name": "Apache Hadoop",
+      "category": "data_ai",
+      "description": "Hadoop big-data ecosystem",
+      "aliases": [
+        "hadoop",
+        "hdfs",
+        "mapreduce",
+        "map reduce",
+        "map-reduce",
+        {
+          "alias": "Hive",
+          "case_sensitive": true,
+          "context_terms": [
+            "hadoop",
+            "query",
+            "hql",
+            "apache"
+          ],
+          "ambiguity_policy": "skip"
+        },
+        {
+          "alias": "Pig",
+          "case_sensitive": true,
+          "context_terms": [
+            "hadoop",
+            "latin",
+            "apache"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Apache Spark",
+      "category": "data_ai",
+      "description": "Spark",
+      "aliases": [
+        "pyspark",
+        "spark sql",
+        {
+          "alias": "Spark",
+          "case_sensitive": true,
+          "context_terms": [
+            "apache",
+            "hadoop",
+            "rdd",
+            "big data",
+            "pyspark",
+            "cluster",
+            "streaming"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Apache Kafka",
+      "category": "data_ai",
+      "description": "Kafka streaming",
+      "aliases": [
+        "kafka"
+      ]
+    },
+    {
+      "name": "Arduino",
+      "category": "engineering_domain",
+      "description": "Arduino",
+      "aliases": []
+    },
+    {
+      "name": "Raspberry Pi",
+      "category": "engineering_domain",
+      "description": "Raspberry Pi",
+      "aliases": []
+    },
+    {
+      "name": "AutoCAD",
+      "category": "tool_platform",
+      "description": "AutoCAD",
+      "aliases": []
+    },
+    {
+      "name": "SolidWorks",
+      "category": "tool_platform",
+      "description": "SolidWorks",
+      "aliases": []
+    },
+    {
+      "name": "ANSYS",
+      "category": "tool_platform",
+      "description": "ANSYS simulation",
+      "aliases": [
+        {
+          "alias": "ANSYS",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "LaTeX",
+      "category": "tool_platform",
+      "description": "LaTeX typesetting",
+      "aliases": [
+        "latex"
+      ]
+    },
+    {
+      "name": "UML",
+      "category": "method_technique",
+      "description": "Unified Modeling Language",
+      "aliases": [
+        {
+          "alias": "UML",
+          "case_sensitive": true
+        },
+        "unified modeling language",
+        "unified modelling language",
+        "use case diagram",
+        "use case diagrams",
+        "class diagram",
+        "class diagrams",
+        "sequence diagram"
+      ]
+    },
+    {
+      "name": "Selenium",
+      "category": "tool_platform",
+      "description": "Selenium test automation",
+      "aliases": []
+    },
+    {
+      "name": "JUnit",
+      "category": "tool_platform",
+      "description": "JUnit",
+      "aliases": []
+    },
+    {
+      "name": "Postman",
+      "category": "tool_platform",
+      "description": "Postman API testing",
+      "aliases": [
+        {
+          "alias": "Postman",
+          "case_sensitive": true,
+          "context_terms": [
+            "api",
+            "testing",
+            "rest",
+            "request"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Eclipse IDE",
+      "category": "tool_platform",
+      "description": "Eclipse",
+      "aliases": [
+        {
+          "alias": "Eclipse",
+          "case_sensitive": true,
+          "context_terms": [
+            "ide",
+            "java",
+            "editor"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Visual Studio Code",
+      "category": "tool_platform",
+      "description": "VS Code",
+      "aliases": [
+        "vs code",
+        "vscode"
+      ]
+    },
+    {
+      "name": "Figma",
+      "category": "tool_platform",
+      "description": "Figma",
+      "aliases": []
+    },
+    {
+      "name": "Machine Learning",
+      "category": "data_ai",
+      "description": "Machine learning",
+      "aliases": [
+        "machine learning",
+        {
+          "alias": "ML",
+          "case_sensitive": true,
+          "context_terms": [
+            "learning",
+            "model",
+            "models",
+            "algorithm",
+            "algorithms",
+            "data",
+            "training",
+            "supervised",
+            "classification",
+            "ai"
+          ],
+          "ambiguity_policy": "flag"
+        }
+      ]
+    },
+    {
+      "name": "Deep Learning",
+      "category": "data_ai",
+      "description": "Deep learning",
+      "aliases": [
+        "deep learning",
+        "deep neural networks",
+        {
+          "alias": "DL",
+          "case_sensitive": true,
+          "context_terms": [
+            "learning",
+            "neural",
+            "network",
+            "networks",
+            "model"
+          ],
+          "ambiguity_policy": "skip"
+        }
+      ]
+    },
+    {
+      "name": "Artificial Intelligence",
+      "category": "data_ai",
+      "description": "Artificial intelligence",
+      "aliases": [
+        "artificial intelligence",
+        {
+          "alias": "AI",
+          "case_sensitive": true,
+          "context_terms": [
+            "intelligence",
+            "machine",
+            "learning",
+            "agent",
+            "agents",
+            "search",
+            "model",
+            "models",
+            "intelligent"
+          ],
+          "ambiguity_policy": "flag"
+        }
+      ]
+    },
+    {
+      "name": "Natural Language Processing",
+      "category": "data_ai",
+      "description": "NLP",
+      "aliases": [
+        "natural language processing",
+        {
+          "alias": "NLP",
+          "case_sensitive": true
+        },
+        "text mining",
+        "text analytics",
+        "computational linguistics"
+      ]
+    },
+    {
+      "name": "Computer Vision",
+      "category": "data_ai",
+      "description": "Computer vision",
+      "aliases": [
+        "computer vision",
+        "image recognition",
+        "object detection"
+      ]
+    },
+    {
+      "name": "Image Processing",
+      "category": "data_ai",
+      "description": "Digital image processing",
+      "aliases": [
+        "digital image processing",
+        "image processing",
+        "image enhancement",
+        "image segmentation"
+      ]
+    },
+    {
+      "name": "Neural Networks",
+      "category": "data_ai",
+      "description": "Artificial neural networks",
+      "aliases": [
+        "neural network",
+        "artificial neural network",
+        "artificial neural networks",
+        {
+          "alias": "ANN",
+          "case_sensitive": true
+        },
+        "perceptron",
+        "multilayer perceptron",
+        "backpropagation",
+        "back propagation"
+      ]
+    },
+    {
+      "name": "Convolutional Neural Networks",
+      "category": "data_ai",
+      "description": "CNNs",
+      "aliases": [
+        "convolutional neural network",
+        {
+          "alias": "CNN",
+          "case_sensitive": true
+        },
+        {
+          "alias": "CNNs",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Recurrent Neural Networks",
+      "category": "data_ai",
+      "description": "RNNs and LSTMs",
+      "aliases": [
+        "recurrent neural network",
+        {
+          "alias": "RNN",
+          "case_sensitive": true
+        },
+        {
+          "alias": "LSTM",
+          "case_sensitive": true
+        },
+        "long short-term memory",
+        {
+          "alias": "GRU",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Transformer Models",
+      "category": "data_ai",
+      "description": "Transformer models",
+      "aliases": [
+        "attention mechanism",
+        "self-attention",
+        {
+          "alias": "BERT",
+          "case_sensitive": true
+        },
+        {
+          "alias": "GPT",
+          "case_sensitive": true
+        },
+        "transformer architecture",
+        "transformer-based models"
+      ]
+    },
+    {
+      "name": "Large Language Models",
+      "category": "data_ai",
+      "description": "LLMs and generative AI",
+      "aliases": [
+        {
+          "alias": "LLM",
+          "case_sensitive": true
+        },
+        {
+          "alias": "LLMs",
+          "case_sensitive": true
+        },
+        "generative ai",
+        "prompt engineering",
+        "large language model"
+      ]
+    },
+    {
+      "name": "Reinforcement Learning",
+      "category": "data_ai",
+      "description": "Reinforcement learning",
+      "aliases": [
+        "reinforcement learning",
+        "q-learning",
+        "q learning",
+        "markov decision process"
+      ]
+    },
+    {
+      "name": "Supervised Learning",
+      "category": "data_ai",
+      "description": "Supervised learning",
+      "aliases": [
+        "classification",
+        "regression analysis",
+        "supervised learning"
+      ]
+    },
+    {
+      "name": "Unsupervised Learning",
+      "category": "data_ai",
+      "description": "Unsupervised learning",
+      "aliases": [
+        "clustering",
+        "k-means",
+        "k means",
+        "unsupervised learning",
+        "dimensionality reduction",
+        {
+          "alias": "PCA",
+          "case_sensitive": true
+        },
+        "principal component analysis"
+      ]
+    },
+    {
+      "name": "Decision Trees",
+      "category": "data_ai",
+      "description": "Decision trees and ensembles",
+      "aliases": [
+        "decision tree",
+        "random forest",
+        "random forests",
+        "gradient boosting",
+        {
+          "alias": "XGBoost",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Support Vector Machines",
+      "category": "data_ai",
+      "description": "SVMs",
+      "aliases": [
+        "support vector machine",
+        {
+          "alias": "SVM",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Data Science",
+      "category": "data_ai",
+      "description": "Data science",
+      "aliases": [
+        "data science"
+      ]
+    },
+    {
+      "name": "Data Analysis",
+      "category": "data_ai",
+      "description": "Analysing data",
+      "aliases": [
+        "data analysis",
+        "data analytics",
+        "exploratory data analysis",
+        {
+          "alias": "EDA",
+          "case_sensitive": true
+        },
+        "data analytics"
+      ]
+    },
+    {
+      "name": "Data Visualization",
+      "category": "data_ai",
+      "description": "Data visualisation",
+      "aliases": [
+        "data visualisation",
+        "data visualization",
+        "visualization",
+        "visualisation",
+        "dashboards",
+        "matplotlib",
+        "seaborn",
+        "plotly"
+      ]
+    },
+    {
+      "name": "Data Mining",
+      "category": "data_ai",
+      "description": "Data mining",
+      "aliases": [
+        "data mining",
+        "association rules",
+        "apriori",
+        "frequent pattern"
+      ]
+    },
+    {
+      "name": "Big Data",
+      "category": "data_ai",
+      "description": "Big data analytics",
+      "aliases": [
+        "big data",
+        "big data analytics"
+      ]
+    },
+    {
+      "name": "Data Preprocessing",
+      "category": "data_ai",
+      "description": "Cleaning and preparing data",
+      "aliases": [
+        "data cleaning",
+        "data preprocessing",
+        "data pre-processing",
+        "feature engineering",
+        "feature selection",
+        "data wrangling"
+      ]
+    },
+    {
+      "name": "pandas",
+      "category": "framework_library",
+      "description": "pandas data analysis library",
+      "aliases": [
+        "pandas"
+      ]
+    },
+    {
+      "name": "NumPy",
+      "category": "framework_library",
+      "description": "NumPy",
+      "aliases": [
+        "numpy"
+      ]
+    },
+    {
+      "name": "scikit-learn",
+      "category": "framework_library",
+      "description": "scikit-learn",
+      "aliases": [
+        "sklearn",
+        "scikit learn"
+      ]
+    },
+    {
+      "name": "TensorFlow",
+      "category": "framework_library",
+      "description": "TensorFlow",
+      "aliases": [
+        "tensorflow"
+      ]
+    },
+    {
+      "name": "Keras",
+      "category": "framework_library",
+      "description": "Keras",
+      "aliases": []
+    },
+    {
+      "name": "PyTorch",
+      "category": "framework_library",
+      "description": "PyTorch",
+      "aliases": [
+        "pytorch"
+      ]
+    },
+    {
+      "name": "OpenCV",
+      "category": "framework_library",
+      "description": "OpenCV",
+      "aliases": [
+        "opencv"
+      ]
+    },
+    {
+      "name": "spaCy",
+      "category": "framework_library",
+      "description": "spaCy NLP library",
+      "aliases": [
+        "spacy"
+      ]
+    },
+    {
+      "name": "NLTK",
+      "category": "framework_library",
+      "description": "Natural Language Toolkit",
+      "aliases": [
+        {
+          "alias": "NLTK",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Model Evaluation",
+      "category": "data_ai",
+      "description": "Evaluating ML models",
+      "aliases": [
+        "model evaluation",
+        "cross validation",
+        "cross-validation",
+        "confusion matrix",
+        "precision and recall",
+        "overfitting",
+        "bias-variance"
+      ]
+    },
+    {
+      "name": "Time Series Analysis",
+      "category": "data_ai",
+      "description": "Time series",
+      "aliases": [
+        "time series",
+        "time-series",
+        "forecasting",
+        {
+          "alias": "ARIMA",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Recommender Systems",
+      "category": "data_ai",
+      "description": "Recommendation systems",
+      "aliases": [
+        "recommendation system",
+        "recommendation systems",
+        "recommender system",
+        "collaborative filtering"
+      ]
+    },
+    {
+      "name": "Probability",
+      "category": "mathematics_statistics",
+      "description": "Probability theory",
+      "aliases": [
+        "probability theory",
+        "probability distributions",
+        "random variables",
+        "bayes theorem",
+        "bayes' theorem"
+      ]
+    },
+    {
+      "name": "Statistics",
+      "category": "mathematics_statistics",
+      "description": "Statistical methods",
+      "aliases": [
+        "statistical methods",
+        "descriptive statistics",
+        "inferential statistics",
+        "hypothesis testing",
+        "statistical inference",
+        "regression",
+        "correlation"
+      ]
+    },
+    {
+      "name": "Linear Algebra",
+      "category": "mathematics_statistics",
+      "description": "Linear algebra",
+      "aliases": [
+        "linear algebra",
+        "matrices",
+        "eigenvalues",
+        "eigenvectors",
+        "vector spaces"
+      ]
+    },
+    {
+      "name": "Calculus",
+      "category": "mathematics_statistics",
+      "description": "Calculus",
+      "aliases": [
+        "differential calculus",
+        "integral calculus",
+        "differential equations",
+        "multivariable calculus"
+      ]
+    },
+    {
+      "name": "Discrete Mathematics",
+      "category": "mathematics_statistics",
+      "description": "Discrete mathematics",
+      "aliases": [
+        "discrete mathematics",
+        "discrete structures",
+        "set theory",
+        "graph theory",
+        "combinatorics",
+        "propositional logic",
+        "predicate logic",
+        "mathematical logic"
+      ]
+    },
+    {
+      "name": "Numerical Methods",
+      "category": "mathematics_statistics",
+      "description": "Numerical methods",
+      "aliases": [
+        "numerical methods",
+        "numerical analysis",
+        "numerical techniques"
+      ]
+    },
+    {
+      "name": "Optimization",
+      "category": "mathematics_statistics",
+      "description": "Mathematical optimisation",
+      "aliases": [
+        "optimisation",
+        "optimization techniques",
+        "linear programming",
+        "gradient descent",
+        "operations research"
+      ]
+    },
+    {
+      "name": "Data Structures",
+      "category": "cs_fundamentals",
+      "description": "Data structures",
+      "aliases": [
+        "data structures",
+        "data structure",
+        "linked list",
+        "linked lists",
+        "stacks",
+        "queues",
+        "binary tree",
+        "binary trees",
+        "hash table",
+        "hash tables",
+        "hashing",
+        "heaps",
+        "graphs"
+      ]
+    },
+    {
+      "name": "Algorithm Design and Analysis",
+      "category": "cs_fundamentals",
+      "description": "Algorithm design and analysis",
+      "aliases": [
+        "algorithm design",
+        "design and analysis of algorithms",
+        "analysis of algorithms",
+        "sorting algorithms",
+        "searching algorithms",
+        "dynamic programming",
+        "greedy algorithms",
+        "divide and conquer",
+        "backtracking",
+        "time complexity",
+        "asymptotic notation"
+      ]
+    },
+    {
+      "name": "Object-Oriented Programming",
+      "category": "cs_fundamentals",
+      "description": "OOP",
+      "aliases": [
+        "object oriented programming",
+        "object-oriented programming",
+        {
+          "alias": "OOP",
+          "case_sensitive": true
+        },
+        {
+          "alias": "OOPs",
+          "case_sensitive": true
+        },
+        "inheritance",
+        "polymorphism",
+        "encapsulation",
+        "abstraction"
+      ]
+    },
+    {
+      "name": "Operating Systems",
+      "category": "cs_fundamentals",
+      "description": "Operating systems",
+      "aliases": [
+        "operating system",
+        "operating systems",
+        "process scheduling",
+        "cpu scheduling",
+        "memory management",
+        "deadlock",
+        "deadlocks",
+        "file systems",
+        "virtual memory",
+        "paging",
+        "semaphores",
+        "process synchronization"
+      ]
+    },
+    {
+      "name": "Computer Networks",
+      "category": "networking",
+      "description": "Computer networking",
+      "aliases": [
+        "computer networks",
+        "computer network",
+        "networking",
+        "data communication",
+        "data communications",
+        "osi model",
+        "tcp/ip",
+        "tcp ip",
+        "routing",
+        "subnetting",
+        "network layer",
+        "transport layer"
+      ]
+    },
+    {
+      "name": "Computer Architecture",
+      "category": "cs_fundamentals",
+      "description": "Computer organisation and architecture",
+      "aliases": [
+        "computer architecture",
+        "computer organization",
+        "computer organisation",
+        "coa",
+        "pipelining",
+        "instruction set",
+        "cache memory"
+      ]
+    },
+    {
+      "name": "Compiler Design",
+      "category": "cs_fundamentals",
+      "description": "Compilers",
+      "aliases": [
+        "compiler design",
+        "lexical analysis",
+        "syntax analysis",
+        "code generation",
+        "code optimization"
+      ]
+    },
+    {
+      "name": "Theory of Computation",
+      "category": "cs_fundamentals",
+      "description": "Automata and formal languages",
+      "aliases": [
+        "theory of computation",
+        "automata theory",
+        "automata",
+        "finite automata",
+        "formal languages",
+        "turing machine",
+        "turing machines",
+        "context free grammar",
+        "regular expressions"
+      ]
+    },
+    {
+      "name": "Software Engineering",
+      "category": "method_technique",
+      "description": "Software engineering",
+      "aliases": [
+        "software engineering",
+        "software development life cycle",
+        {
+          "alias": "SDLC",
+          "case_sensitive": true
+        },
+        "requirements engineering",
+        "software requirements",
+        "software design",
+        "software process models"
+      ]
+    },
+    {
+      "name": "Software Testing",
+      "category": "method_technique",
+      "description": "Testing and QA",
+      "aliases": [
+        "software testing",
+        "unit testing",
+        "integration testing",
+        "test cases",
+        "black box testing",
+        "white box testing",
+        "quality assurance",
+        "test automation"
+      ]
+    },
+    {
+      "name": "Agile Methodologies",
+      "category": "method_technique",
+      "description": "Agile and Scrum",
+      "aliases": [
+        "agile",
+        "scrum",
+        "agile methodology",
+        "agile methodologies",
+        "kanban",
+        "sprint"
+      ]
+    },
+    {
+      "name": "Design Patterns",
+      "category": "method_technique",
+      "description": "Software design patterns",
+      "aliases": [
+        "design patterns",
+        "design pattern",
+        {
+          "alias": "MVC",
+          "case_sensitive": true
+        },
+        "model view controller"
+      ]
+    },
+    {
+      "name": "System Design",
+      "category": "method_technique",
+      "description": "Designing scalable systems",
+      "aliases": [
+        "system design",
+        "software architecture",
+        "microservices",
+        "distributed systems"
+      ]
+    },
+    {
+      "name": "Distributed Computing",
+      "category": "cs_fundamentals",
+      "description": "Distributed and parallel computing",
+      "aliases": [
+        "distributed computing",
+        "parallel computing",
+        "parallel processing",
+        "high performance computing",
+        {
+          "alias": "MPI",
+          "case_sensitive": true
+        },
+        {
+          "alias": "CUDA",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Digital Logic",
+      "category": "engineering_domain",
+      "description": "Digital logic design",
+      "aliases": [
+        "digital logic",
+        "digital electronics",
+        "logic gates",
+        "boolean algebra",
+        "combinational circuits",
+        "sequential circuits",
+        "flip flops",
+        "flip-flops"
+      ]
+    },
+    {
+      "name": "Microprocessors",
+      "category": "engineering_domain",
+      "description": "Microprocessors and microcontrollers",
+      "aliases": [
+        "microprocessor",
+        "microprocessors",
+        "microcontroller",
+        "microcontrollers",
+        "8085",
+        "8086",
+        "8051"
+      ]
+    },
+    {
+      "name": "Embedded Systems",
+      "category": "engineering_domain",
+      "description": "Embedded systems",
+      "aliases": [
+        "embedded systems",
+        "embedded system",
+        "embedded c",
+        "real time operating system",
+        {
+          "alias": "RTOS",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Internet of Things",
+      "category": "engineering_domain",
+      "description": "IoT",
+      "aliases": [
+        "internet of things",
+        {
+          "alias": "IoT",
+          "case_sensitive": true
+        },
+        "sensor networks",
+        "wireless sensor networks"
+      ]
+    },
+    {
+      "name": "Blockchain",
+      "category": "security",
+      "description": "Blockchain technology",
+      "aliases": [
+        "blockchain",
+        "distributed ledger",
+        "smart contracts",
+        "smart contract",
+        "cryptocurrency"
+      ]
+    },
+    {
+      "name": "Computer Graphics",
+      "category": "cs_fundamentals",
+      "description": "Computer graphics",
+      "aliases": [
+        "computer graphics",
+        "opengl",
+        "rendering",
+        "rasterization"
+      ]
+    },
+    {
+      "name": "Signal Processing",
+      "category": "engineering_domain",
+      "description": "Digital signal processing",
+      "aliases": [
+        "digital signal processing",
+        "signal processing",
+        {
+          "alias": "DSP",
+          "case_sensitive": true
+        },
+        "fourier transform",
+        "z-transform"
+      ]
+    },
+    {
+      "name": "Control Systems",
+      "category": "engineering_domain",
+      "description": "Control systems",
+      "aliases": [
+        "control systems",
+        "control system",
+        "pid controller",
+        "feedback control"
+      ]
+    },
+    {
+      "name": "VLSI Design",
+      "category": "engineering_domain",
+      "description": "VLSI design",
+      "aliases": [
+        {
+          "alias": "VLSI",
+          "case_sensitive": true
+        },
+        "vlsi design"
+      ]
+    },
+    {
+      "name": "Communication Systems",
+      "category": "engineering_domain",
+      "description": "Analog and digital communication",
+      "aliases": [
+        "analog communication",
+        "digital communication",
+        "communication systems",
+        "modulation"
+      ]
+    },
+    {
+      "name": "Circuit Analysis",
+      "category": "engineering_domain",
+      "description": "Electrical circuits",
+      "aliases": [
+        "circuit analysis",
+        "network theory",
+        "electrical circuits",
+        "kirchhoff",
+        "circuit theory"
+      ]
+    },
+    {
+      "name": "Cyber Security",
+      "category": "security",
+      "description": "Cybersecurity",
+      "aliases": [
+        "cyber security",
+        "cybersecurity",
+        "information security",
+        "network security",
+        "computer security"
+      ]
+    },
+    {
+      "name": "Cryptography",
+      "category": "security",
+      "description": "Cryptography",
+      "aliases": [
+        "cryptography",
+        "encryption",
+        "decryption",
+        {
+          "alias": "RSA",
+          "case_sensitive": true
+        },
+        {
+          "alias": "AES",
+          "case_sensitive": true
+        },
+        "public key",
+        "digital signatures"
+      ]
+    },
+    {
+      "name": "Ethical Hacking",
+      "category": "security",
+      "description": "Penetration testing",
+      "aliases": [
+        "ethical hacking",
+        "penetration testing",
+        "vulnerability assessment",
+        {
+          "alias": "VAPT",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Web Security",
+      "category": "security",
+      "description": "Securing web apps",
+      "aliases": [
+        {
+          "alias": "OWASP",
+          "case_sensitive": true
+        },
+        "sql injection",
+        "cross site scripting",
+        {
+          "alias": "XSS",
+          "case_sensitive": true
+        },
+        "web security"
+      ]
+    },
+    {
+      "name": "Digital Forensics",
+      "category": "security",
+      "description": "Cyber forensics",
+      "aliases": [
+        "digital forensics",
+        "cyber forensics",
+        "computer forensics"
+      ]
+    },
+    {
+      "name": "Wireless Networks",
+      "category": "networking",
+      "description": "Wireless and mobile networks",
+      "aliases": [
+        "wireless networks",
+        "wireless communication",
+        "mobile networks",
+        {
+          "alias": "5G",
+          "case_sensitive": true
+        },
+        {
+          "alias": "LTE",
+          "case_sensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Network Protocols",
+      "category": "networking",
+      "description": "Protocols",
+      "aliases": [
+        {
+          "alias": "TCP",
+          "case_sensitive": true
+        },
+        {
+          "alias": "UDP",
+          "case_sensitive": true
+        },
+        {
+          "alias": "HTTP",
+          "case_sensitive": true
+        },
+        {
+          "alias": "DNS",
+          "case_sensitive": true
+        },
+        {
+          "alias": "DHCP",
+          "case_sensitive": true
+        },
+        "network protocols"
+      ]
+    },
+    {
+      "name": "Research Methodology",
+      "category": "method_technique",
+      "description": "Research methods",
+      "aliases": [
+        "research methodology",
+        "research methods",
+        "literature review",
+        "research design"
+      ]
+    },
+    {
+      "name": "Project Management",
+      "category": "professional_competency",
+      "description": "Planning and managing projects",
+      "aliases": [
+        "project management",
+        "project planning",
+        "project scheduling",
+        {
+          "alias": "PERT",
+          "case_sensitive": true
+        },
+        "critical path method",
+        "risk management"
+      ]
+    },
+    {
+      "name": "Technical Writing",
+      "category": "professional_competency",
+      "description": "Writing technical documents",
+      "aliases": [
+        "technical writing",
+        "report writing",
+        "technical report",
+        "documentation"
+      ]
+    },
+    {
+      "name": "Simulation and Modelling",
+      "category": "method_technique",
+      "description": "Simulation and modelling",
+      "aliases": [
+        "simulation",
+        "modelling and simulation",
+        "modeling and simulation",
+        "system modelling"
+      ]
+    },
+    {
+      "name": "Financial Analysis",
+      "category": "method_technique",
+      "description": "Financial analysis",
+      "aliases": [
+        "financial analysis",
+        "financial modelling",
+        "financial modeling",
+        "accounting",
+        "financial statements"
+      ]
+    },
+    {
+      "name": "Business Analytics",
+      "category": "data_ai",
+      "description": "Business analytics",
+      "aliases": [
+        "business analytics",
+        "business intelligence"
+      ]
+    },
+    {
+      "name": "Communication Skills",
+      "category": "professional_competency",
+      "description": "Oral and written communication",
+      "aliases": [
+        "communication skills",
+        "oral communication",
+        "written communication",
+        "technical communication",
+        "presentation skills",
+        "effective communication",
+        "verbal communication"
+      ]
+    },
+    {
+      "name": "Teamwork",
+      "category": "professional_competency",
+      "description": "Working in teams",
+      "aliases": [
+        "teamwork",
+        "team work",
+        "work in teams",
+        "working in teams",
+        "collaboration",
+        "team player",
+        "work effectively in a team"
+      ]
+    },
+    {
+      "name": "Problem Solving",
+      "category": "professional_competency",
+      "description": "Problem solving",
+      "aliases": [
+        "problem solving",
+        "problem-solving",
+        "solve problems",
+        "solving problems"
+      ]
+    },
+    {
+      "name": "Critical Thinking",
+      "category": "professional_competency",
+      "description": "Critical and analytical thinking",
+      "aliases": [
+        "critical thinking",
+        "analytical thinking",
+        "analytical skills"
+      ]
+    },
+    {
+      "name": "Leadership",
+      "category": "professional_competency",
+      "description": "Leadership",
+      "aliases": [
+        "leadership",
+        "leadership skills"
+      ]
+    },
+    {
+      "name": "Professional Ethics",
+      "category": "professional_competency",
+      "description": "Ethics and professional responsibility",
+      "aliases": [
+        "professional ethics",
+        "engineering ethics",
+        "ethical responsibilities",
+        "ethics",
+        "professional responsibility",
+        "intellectual property",
+        "cyber law"
+      ]
+    },
+    {
+      "name": "Entrepreneurship",
+      "category": "professional_competency",
+      "description": "Entrepreneurship and innovation",
+      "aliases": [
+        "entrepreneurship",
+        "innovation",
+        "startup",
+        "start-up"
+      ]
+    },
+    {
+      "name": "Lifelong Learning",
+      "category": "professional_competency",
+      "description": "Self-directed learning",
+      "aliases": [
+        "lifelong learning",
+        "life-long learning",
+        "self learning",
+        "self-learning"
+      ]
+    },
+    {
+      "name": "Time Management",
+      "category": "professional_competency",
+      "description": "Time management",
+      "aliases": [
+        "time management"
+      ]
+    },
+    {
+      "name": "Design Thinking",
+      "category": "method_technique",
+      "description": "Design thinking",
+      "aliases": [
+        "design thinking"
+      ]
+    }
+  ],
+  "removed_aliases": [
+    "hash functions"
+  ]
+}

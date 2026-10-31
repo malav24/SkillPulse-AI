@@ -1,0 +1,9 @@
+# Windows scripts need CRLF, shell scripts need LF
+*.bat   text eol=crlf
+*.sh    text eol=lf
+# Binary files: never change them
+*.pdf     binary
+*.gz      binary
+*.npz     binary
+*.joblib  binary
+*.png     binary

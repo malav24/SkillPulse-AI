@@ -1,0 +1,2535 @@
+{
+ "built_at": "2026-10-25T18:02:02+00:00",
+ "data": {
+  "postings_loaded": 130289,
+  "it_postings": 25283,
+  "skills_in_taxonomy": 188,
+  "posting_skill_links": 300181,
+  "period": "2024\u20132025",
+  "files": {
+   "job_postings_2025.csv": 90296,
+   "job_postings_2024.csv": 39993
+  }
+ },
+ "role_classifier": {
+  "task": "Predict the job role from a posting's skills and description (title excluded)",
+  "labels": [
+   "Data Scientist / ML Engineer",
+   "Data Engineer",
+   "Data Analyst / BI",
+   "Cybersecurity",
+   "DevOps / Cloud",
+   "QA / Testing",
+   "Mobile Developer",
+   "Web / Full Stack Developer",
+   "Software Developer",
+   "Network / IT Support",
+   "Other (non-IT)"
+  ],
+  "train_size": 71688,
+  "test_size": 17923,
+  "class_counts": {
+   "Data Scientist / ML Engineer": 1701,
+   "Data Engineer": 1143,
+   "Data Analyst / BI": 661,
+   "Cybersecurity": 578,
+   "DevOps / Cloud": 2145,
+   "QA / Testing": 2237,
+   "Mobile Developer": 437,
+   "Web / Full Stack Developer": 2519,
+   "Software Developer": 9456,
+   "Network / IT Support": 1082,
+   "Other (non-IT)": 67652
+  },
+  "features": "TF-IDF word uni+bi-grams (max 80,000) of extracted skills + description; job title removed",
+  "label_source": "Job-title rules (weak supervision); see ml/common.py ROLE_RULES",
+  "models": {
+   "Baseline (majority class)": {
+    "accuracy": 0.755,
+    "macro_f1": 0.0782,
+    "weighted_f1": 0.6495,
+    "per_class": {
+     "Data Scientist / ML Engineer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 340
+     },
+     "Data Engineer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 229
+     },
+     "Data Analyst / BI": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 132
+     },
+     "Cybersecurity": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 116
+     },
+     "DevOps / Cloud": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 429
+     },
+     "QA / Testing": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 448
+     },
+     "Mobile Developer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 87
+     },
+     "Web / Full Stack Developer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 504
+     },
+     "Software Developer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 1891
+     },
+     "Network / IT Support": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 216
+     },
+     "Other (non-IT)": {
+      "precision": 0.755,
+      "recall": 1.0,
+      "f1": 0.8604,
+      "support": 13531
+     }
+    },
+    "confusion_matrix": [
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      340
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      229
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      132
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      116
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      429
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      448
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      87
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      504
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1891
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      216
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      13531
+     ]
+    ],
+    "train_seconds": 10.0,
+    "predict_ms_per_1000": 93.64
+   },
+   "Complement Naive Bayes": {
+    "accuracy": 0.8332,
+    "macro_f1": 0.6195,
+    "weighted_f1": 0.8409,
+    "per_class": {
+     "Data Scientist / ML Engineer": {
+      "precision": 0.576,
+      "recall": 0.7912,
+      "f1": 0.6667,
+      "support": 340
+     },
+     "Data Engineer": {
+      "precision": 0.5808,
+      "recall": 0.738,
+      "f1": 0.65,
+      "support": 229
+     },
+     "Data Analyst / BI": {
+      "precision": 0.5167,
+      "recall": 0.4697,
+      "f1": 0.4921,
+      "support": 132
+     },
+     "Cybersecurity": {
+      "precision": 0.5,
+      "recall": 0.5345,
+      "f1": 0.5167,
+      "support": 116
+     },
+     "DevOps / Cloud": {
+      "precision": 0.5256,
+      "recall": 0.4779,
+      "f1": 0.5006,
+      "support": 429
+     },
+     "QA / Testing": {
+      "precision": 0.6641,
+      "recall": 0.5871,
+      "f1": 0.6232,
+      "support": 448
+     },
+     "Mobile Developer": {
+      "precision": 0.7528,
+      "recall": 0.7701,
+      "f1": 0.7614,
+      "support": 87
+     },
+     "Web / Full Stack Developer": {
+      "precision": 0.6379,
+      "recall": 0.6151,
+      "f1": 0.6263,
+      "support": 504
+     },
+     "Software Developer": {
+      "precision": 0.5229,
+      "recall": 0.8207,
+      "f1": 0.6388,
+      "support": 1891
+     },
+     "Network / IT Support": {
+      "precision": 0.5098,
+      "recall": 0.3611,
+      "f1": 0.4228,
+      "support": 216
+     },
+     "Other (non-IT)": {
+      "precision": 0.9563,
+      "recall": 0.8792,
+      "f1": 0.9161,
+      "support": 13531
+     }
+    },
+    "confusion_matrix": [
+     [
+      269,
+      4,
+      3,
+      0,
+      4,
+      2,
+      0,
+      7,
+      21,
+      0,
+      30
+     ],
+     [
+      8,
+      169,
+      3,
+      0,
+      6,
+      4,
+      0,
+      3,
+      31,
+      1,
+      4
+     ],
+     [
+      8,
+      18,
+      62,
+      0,
+      0,
+      0,
+      1,
+      1,
+      10,
+      0,
+      32
+     ],
+     [
+      2,
+      0,
+      1,
+      62,
+      7,
+      2,
+      0,
+      1,
+      8,
+      6,
+      27
+     ],
+     [
+      8,
+      17,
+      1,
+      4,
+      205,
+      7,
+      0,
+      16,
+      111,
+      8,
+      52
+     ],
+     [
+      3,
+      1,
+      0,
+      2,
+      3,
+      263,
+      3,
+      2,
+      50,
+      3,
+      118
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      67,
+      10,
+      6,
+      0,
+      4
+     ],
+     [
+      3,
+      0,
+      0,
+      0,
+      3,
+      2,
+      1,
+      310,
+      163,
+      0,
+      22
+     ],
+     [
+      36,
+      21,
+      5,
+      2,
+      25,
+      19,
+      2,
+      71,
+      1552,
+      5,
+      153
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      15,
+      3,
+      0,
+      0,
+      19,
+      78,
+      101
+     ],
+     [
+      130,
+      61,
+      45,
+      54,
+      122,
+      94,
+      15,
+      65,
+      997,
+      52,
+      11896
+     ]
+    ],
+    "train_seconds": 10.0,
+    "predict_ms_per_1000": 92.08
+   },
+   "Logistic Regression": {
+    "accuracy": 0.8434,
+    "macro_f1": 0.6508,
+    "weighted_f1": 0.8555,
+    "per_class": {
+     "Data Scientist / ML Engineer": {
+      "precision": 0.6376,
+      "recall": 0.8382,
+      "f1": 0.7243,
+      "support": 340
+     },
+     "Data Engineer": {
+      "precision": 0.5746,
+      "recall": 0.7904,
+      "f1": 0.6654,
+      "support": 229
+     },
+     "Data Analyst / BI": {
+      "precision": 0.3623,
+      "recall": 0.7576,
+      "f1": 0.4902,
+      "support": 132
+     },
+     "Cybersecurity": {
+      "precision": 0.4213,
+      "recall": 0.7155,
+      "f1": 0.5304,
+      "support": 116
+     },
+     "DevOps / Cloud": {
+      "precision": 0.4769,
+      "recall": 0.6503,
+      "f1": 0.5503,
+      "support": 429
+     },
+     "QA / Testing": {
+      "precision": 0.5413,
+      "recall": 0.7455,
+      "f1": 0.6272,
+      "support": 448
+     },
+     "Mobile Developer": {
+      "precision": 0.7573,
+      "recall": 0.8966,
+      "f1": 0.8211,
+      "support": 87
+     },
+     "Web / Full Stack Developer": {
+      "precision": 0.6687,
+      "recall": 0.8492,
+      "f1": 0.7483,
+      "support": 504
+     },
+     "Software Developer": {
+      "precision": 0.6637,
+      "recall": 0.7504,
+      "f1": 0.7044,
+      "support": 1891
+     },
+     "Network / IT Support": {
+      "precision": 0.2867,
+      "recall": 0.5602,
+      "f1": 0.3793,
+      "support": 216
+     },
+     "Other (non-IT)": {
+      "precision": 0.9693,
+      "recall": 0.8727,
+      "f1": 0.9185,
+      "support": 13531
+     }
+    },
+    "confusion_matrix": [
+     [
+      285,
+      6,
+      4,
+      0,
+      5,
+      1,
+      1,
+      6,
+      10,
+      0,
+      22
+     ],
+     [
+      8,
+      181,
+      6,
+      1,
+      8,
+      0,
+      0,
+      2,
+      16,
+      1,
+      6
+     ],
+     [
+      1,
+      7,
+      100,
+      0,
+      0,
+      0,
+      0,
+      1,
+      3,
+      0,
+      20
+     ],
+     [
+      1,
+      0,
+      0,
+      83,
+      6,
+      1,
+      0,
+      0,
+      3,
+      10,
+      12
+     ],
+     [
+      9,
+      18,
+      1,
+      5,
+      279,
+      7,
+      0,
+      18,
+      41,
+      15,
+      36
+     ],
+     [
+      5,
+      2,
+      0,
+      4,
+      6,
+      334,
+      1,
+      2,
+      21,
+      5,
+      68
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      78,
+      4,
+      4,
+      0,
+      1
+     ],
+     [
+      3,
+      1,
+      0,
+      1,
+      13,
+      2,
+      3,
+      428,
+      43,
+      0,
+      10
+     ],
+     [
+      35,
+      29,
+      10,
+      5,
+      79,
+      43,
+      5,
+      110,
+      1419,
+      18,
+      138
+     ],
+     [
+      0,
+      1,
+      0,
+      4,
+      16,
+      2,
+      0,
+      0,
+      11,
+      121,
+      61
+     ],
+     [
+      100,
+      70,
+      155,
+      94,
+      173,
+      227,
+      15,
+      69,
+      567,
+      252,
+      11809
+     ]
+    ],
+    "train_seconds": 61.1,
+    "predict_ms_per_1000": 94.74
+   },
+   "Linear SVM": {
+    "accuracy": 0.8662,
+    "macro_f1": 0.6728,
+    "weighted_f1": 0.8721,
+    "per_class": {
+     "Data Scientist / ML Engineer": {
+      "precision": 0.6511,
+      "recall": 0.8176,
+      "f1": 0.7249,
+      "support": 340
+     },
+     "Data Engineer": {
+      "precision": 0.5641,
+      "recall": 0.7686,
+      "f1": 0.6506,
+      "support": 229
+     },
+     "Data Analyst / BI": {
+      "precision": 0.4512,
+      "recall": 0.7348,
+      "f1": 0.5591,
+      "support": 132
+     },
+     "Cybersecurity": {
+      "precision": 0.4396,
+      "recall": 0.6897,
+      "f1": 0.5369,
+      "support": 116
+     },
+     "DevOps / Cloud": {
+      "precision": 0.5158,
+      "recall": 0.648,
+      "f1": 0.5744,
+      "support": 429
+     },
+     "QA / Testing": {
+      "precision": 0.6284,
+      "recall": 0.721,
+      "f1": 0.6715,
+      "support": 448
+     },
+     "Mobile Developer": {
+      "precision": 0.729,
+      "recall": 0.8966,
+      "f1": 0.8041,
+      "support": 87
+     },
+     "Web / Full Stack Developer": {
+      "precision": 0.6636,
+      "recall": 0.8571,
+      "f1": 0.7481,
+      "support": 504
+     },
+     "Software Developer": {
+      "precision": 0.715,
+      "recall": 0.7218,
+      "f1": 0.7184,
+      "support": 1891
+     },
+     "Network / IT Support": {
+      "precision": 0.4368,
+      "recall": 0.5278,
+      "f1": 0.478,
+      "support": 216
+     },
+     "Other (non-IT)": {
+      "precision": 0.9608,
+      "recall": 0.9093,
+      "f1": 0.9344,
+      "support": 13531
+     }
+    },
+    "confusion_matrix": [
+     [
+      278,
+      7,
+      6,
+      0,
+      5,
+      3,
+      1,
+      8,
+      8,
+      0,
+      24
+     ],
+     [
+      7,
+      176,
+      7,
+      0,
+      7,
+      1,
+      0,
+      1,
+      13,
+      2,
+      15
+     ],
+     [
+      1,
+      5,
+      97,
+      0,
+      0,
+      0,
+      0,
+      1,
+      4,
+      0,
+      24
+     ],
+     [
+      1,
+      0,
+      0,
+      80,
+      6,
+      1,
+      0,
+      1,
+      4,
+      8,
+      15
+     ],
+     [
+      8,
+      19,
+      2,
+      4,
+      278,
+      6,
+      0,
+      20,
+      35,
+      9,
+      48
+     ],
+     [
+      4,
+      2,
+      0,
+      4,
+      5,
+      323,
+      1,
+      2,
+      21,
+      4,
+      82
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      78,
+      5,
+      2,
+      0,
+      1
+     ],
+     [
+      2,
+      1,
+      0,
+      1,
+      9,
+      2,
+      3,
+      432,
+      39,
+      0,
+      15
+     ],
+     [
+      38,
+      29,
+      11,
+      4,
+      71,
+      36,
+      5,
+      116,
+      1365,
+      12,
+      204
+     ],
+     [
+      0,
+      1,
+      0,
+      1,
+      17,
+      2,
+      0,
+      0,
+      7,
+      114,
+      74
+     ],
+     [
+      88,
+      72,
+      92,
+      88,
+      141,
+      139,
+      19,
+      65,
+      411,
+      112,
+      12304
+     ]
+    ],
+    "train_seconds": 18.7,
+    "predict_ms_per_1000": 91.15
+   },
+   "Random Forest": {
+    "accuracy": 0.8502,
+    "macro_f1": 0.4961,
+    "weighted_f1": 0.8279,
+    "per_class": {
+     "Data Scientist / ML Engineer": {
+      "precision": 0.8211,
+      "recall": 0.5941,
+      "f1": 0.6894,
+      "support": 340
+     },
+     "Data Engineer": {
+      "precision": 0.726,
+      "recall": 0.4629,
+      "f1": 0.5653,
+      "support": 229
+     },
+     "Data Analyst / BI": {
+      "precision": 0.7778,
+      "recall": 0.053,
+      "f1": 0.0993,
+      "support": 132
+     },
+     "Cybersecurity": {
+      "precision": 0.5556,
+      "recall": 0.0862,
+      "f1": 0.1493,
+      "support": 116
+     },
+     "DevOps / Cloud": {
+      "precision": 0.7028,
+      "recall": 0.3473,
+      "f1": 0.4649,
+      "support": 429
+     },
+     "QA / Testing": {
+      "precision": 0.7958,
+      "recall": 0.4263,
+      "f1": 0.5552,
+      "support": 448
+     },
+     "Mobile Developer": {
+      "precision": 0.9,
+      "recall": 0.5172,
+      "f1": 0.6569,
+      "support": 87
+     },
+     "Web / Full Stack Developer": {
+      "precision": 0.6779,
+      "recall": 0.6766,
+      "f1": 0.6773,
+      "support": 504
+     },
+     "Software Developer": {
+      "precision": 0.7688,
+      "recall": 0.4923,
+      "f1": 0.6003,
+      "support": 1891
+     },
+     "Network / IT Support": {
+      "precision": 0.8182,
+      "recall": 0.0417,
+      "f1": 0.0793,
+      "support": 216
+     },
+     "Other (non-IT)": {
+      "precision": 0.8672,
+      "recall": 0.9791,
+      "f1": 0.9197,
+      "support": 13531
+     }
+    },
+    "confusion_matrix": [
+     [
+      202,
+      2,
+      0,
+      0,
+      2,
+      1,
+      0,
+      6,
+      7,
+      0,
+      120
+     ],
+     [
+      3,
+      106,
+      0,
+      0,
+      3,
+      0,
+      0,
+      2,
+      7,
+      0,
+      108
+     ],
+     [
+      1,
+      4,
+      7,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      118
+     ],
+     [
+      0,
+      0,
+      0,
+      10,
+      2,
+      0,
+      0,
+      1,
+      0,
+      1,
+      102
+     ],
+     [
+      0,
+      8,
+      0,
+      1,
+      149,
+      2,
+      0,
+      15,
+      44,
+      0,
+      210
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      1,
+      191,
+      0,
+      1,
+      11,
+      0,
+      242
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      45,
+      8,
+      3,
+      0,
+      31
+     ],
+     [
+      2,
+      0,
+      0,
+      0,
+      6,
+      2,
+      0,
+      341,
+      69,
+      0,
+      84
+     ],
+     [
+      17,
+      5,
+      0,
+      0,
+      27,
+      10,
+      3,
+      88,
+      931,
+      0,
+      810
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      2,
+      9,
+      204
+     ],
+     [
+      20,
+      21,
+      2,
+      6,
+      21,
+      34,
+      2,
+      40,
+      136,
+      1,
+      13248
+     ]
+    ],
+    "train_seconds": 201.2,
+    "predict_ms_per_1000": 198.8
+   },
+   "Linear SVM (calibrated)": {
+    "accuracy": 0.876,
+    "macro_f1": 0.6523,
+    "weighted_f1": 0.8691,
+    "per_class": {
+     "Data Scientist / ML Engineer": {
+      "precision": 0.7715,
+      "recall": 0.6853,
+      "f1": 0.7259,
+      "support": 340
+     },
+     "Data Engineer": {
+      "precision": 0.6934,
+      "recall": 0.6419,
+      "f1": 0.6667,
+      "support": 229
+     },
+     "Data Analyst / BI": {
+      "precision": 0.6818,
+      "recall": 0.4545,
+      "f1": 0.5455,
+      "support": 132
+     },
+     "Cybersecurity": {
+      "precision": 0.642,
+      "recall": 0.4483,
+      "f1": 0.5279,
+      "support": 116
+     },
+     "DevOps / Cloud": {
+      "precision": 0.6824,
+      "recall": 0.4709,
+      "f1": 0.5572,
+      "support": 429
+     },
+     "QA / Testing": {
+      "precision": 0.7493,
+      "recall": 0.5804,
+      "f1": 0.6541,
+      "support": 448
+     },
+     "Mobile Developer": {
+      "precision": 0.8514,
+      "recall": 0.7241,
+      "f1": 0.7826,
+      "support": 87
+     },
+     "Web / Full Stack Developer": {
+      "precision": 0.7328,
+      "recall": 0.7619,
+      "f1": 0.7471,
+      "support": 504
+     },
+     "Software Developer": {
+      "precision": 0.7406,
+      "recall": 0.6674,
+      "f1": 0.7021,
+      "support": 1891
+     },
+     "Network / IT Support": {
+      "precision": 0.6049,
+      "recall": 0.2269,
+      "f1": 0.33,
+      "support": 216
+     },
+     "Other (non-IT)": {
+      "precision": 0.9138,
+      "recall": 0.9599,
+      "f1": 0.9363,
+      "support": 13531
+     }
+    },
+    "confusion_matrix": [
+     [
+      233,
+      6,
+      0,
+      0,
+      1,
+      2,
+      0,
+      7,
+      9,
+      0,
+      82
+     ],
+     [
+      3,
+      147,
+      3,
+      0,
+      5,
+      0,
+      0,
+      1,
+      17,
+      0,
+      53
+     ],
+     [
+      2,
+      2,
+      60,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      0,
+      65
+     ],
+     [
+      1,
+      0,
+      0,
+      52,
+      2,
+      0,
+      0,
+      1,
+      3,
+      3,
+      54
+     ],
+     [
+      3,
+      10,
+      0,
+      2,
+      202,
+      5,
+      0,
+      18,
+      50,
+      0,
+      139
+     ],
+     [
+      1,
+      2,
+      0,
+      3,
+      2,
+      260,
+      1,
+      2,
+      17,
+      3,
+      157
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      63,
+      4,
+      3,
+      0,
+      17
+     ],
+     [
+      2,
+      0,
+      0,
+      0,
+      4,
+      2,
+      1,
+      384,
+      69,
+      0,
+      42
+     ],
+     [
+      20,
+      14,
+      3,
+      0,
+      33,
+      20,
+      3,
+      69,
+      1262,
+      2,
+      465
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      8,
+      2,
+      0,
+      0,
+      6,
+      49,
+      151
+     ],
+     [
+      37,
+      31,
+      22,
+      24,
+      39,
+      56,
+      6,
+      37,
+      266,
+      24,
+      12989
+     ]
+    ],
+    "train_seconds": 0.0,
+    "predict_ms_per_1000": 94.96
+   }
+  },
+  "best_model": "Linear SVM",
+  "assignment": {
+   "from_title": 23627,
+   "from_model": 1656,
+   "other": 105006
+  },
+  "final_role_counts": {
+   "Data Scientist / ML Engineer": 1945,
+   "Data Engineer": 1252,
+   "Data Analyst / BI": 746,
+   "Cybersecurity": 710,
+   "DevOps / Cloud": 2340,
+   "QA / Testing": 2793,
+   "Mobile Developer": 464,
+   "Web / Full Stack Developer": 2722,
+   "Software Developer": 10784,
+   "Network / IT Support": 1527,
+   "Other (non-IT)": 105006
+  }
+ },
+ "requirement_classifier": {
+  "task": "Classify a job-description sentence as required / preferred / neutral",
+  "labels": [
+   "required",
+   "preferred",
+   "neutral"
+  ],
+  "train_size": 117564,
+  "test_size": 29392,
+  "class_counts": {
+   "required": 52212,
+   "preferred": 34744,
+   "neutral": 60000
+  },
+  "features": "TF-IDF word uni+bi-grams (max 60,000), heading words removed",
+  "models": {
+   "Baseline (majority class)": {
+    "accuracy": 0.4083,
+    "macro_f1": 0.1933,
+    "weighted_f1": 0.2367,
+    "per_class": {
+     "required": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 10443
+     },
+     "preferred": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 6949
+     },
+     "neutral": {
+      "precision": 0.4083,
+      "recall": 1.0,
+      "f1": 0.5798,
+      "support": 12000
+     }
+    },
+    "confusion_matrix": [
+     [
+      0,
+      0,
+      10443
+     ],
+     [
+      0,
+      0,
+      6949
+     ],
+     [
+      0,
+      0,
+      12000
+     ]
+    ],
+    "train_seconds": 3.4,
+    "predict_ms_per_1000": 18.24
+   },
+   "Multinomial Naive Bayes": {
+    "accuracy": 0.5934,
+    "macro_f1": 0.5474,
+    "weighted_f1": 0.5777,
+    "per_class": {
+     "required": {
+      "precision": 0.5418,
+      "recall": 0.6255,
+      "f1": 0.5806,
+      "support": 10443
+     },
+     "preferred": {
+      "precision": 0.5227,
+      "recall": 0.2756,
+      "f1": 0.3609,
+      "support": 6949
+     },
+     "neutral": {
+      "precision": 0.658,
+      "recall": 0.7496,
+      "f1": 0.7008,
+      "support": 12000
+     }
+    },
+    "confusion_matrix": [
+     [
+      6532,
+      1141,
+      2770
+     ],
+     [
+      3128,
+      1915,
+      1906
+     ],
+     [
+      2397,
+      608,
+      8995
+     ]
+    ],
+    "train_seconds": 3.4,
+    "predict_ms_per_1000": 19.22
+   },
+   "Logistic Regression": {
+    "accuracy": 0.5813,
+    "macro_f1": 0.563,
+    "weighted_f1": 0.5834,
+    "per_class": {
+     "required": {
+      "precision": 0.5506,
+      "recall": 0.5265,
+      "f1": 0.5383,
+      "support": 10443
+     },
+     "preferred": {
+      "precision": 0.4284,
+      "recall": 0.4773,
+      "f1": 0.4516,
+      "support": 6949
+     },
+     "neutral": {
+      "precision": 0.7092,
+      "recall": 0.6893,
+      "f1": 0.6991,
+      "support": 12000
+     }
+    },
+    "confusion_matrix": [
+     [
+      5498,
+      2830,
+      2115
+     ],
+     [
+      2355,
+      3317,
+      1277
+     ],
+     [
+      2133,
+      1595,
+      8272
+     ]
+    ],
+    "train_seconds": 16.7,
+    "predict_ms_per_1000": 19.0
+   },
+   "Linear SVM": {
+    "accuracy": 0.5905,
+    "macro_f1": 0.5668,
+    "weighted_f1": 0.5891,
+    "per_class": {
+     "required": {
+      "precision": 0.5536,
+      "recall": 0.5534,
+      "f1": 0.5535,
+      "support": 10443
+     },
+     "preferred": {
+      "precision": 0.4512,
+      "recall": 0.4316,
+      "f1": 0.4412,
+      "support": 6949
+     },
+     "neutral": {
+      "precision": 0.6971,
+      "recall": 0.7148,
+      "f1": 0.7058,
+      "support": 12000
+     }
+    },
+    "confusion_matrix": [
+     [
+      5779,
+      2363,
+      2301
+     ],
+     [
+      2523,
+      2999,
+      1427
+     ],
+     [
+      2137,
+      1285,
+      8578
+     ]
+    ],
+    "train_seconds": 8.1,
+    "predict_ms_per_1000": 20.97
+   },
+   "Random Forest": {
+    "accuracy": 0.5935,
+    "macro_f1": 0.5615,
+    "weighted_f1": 0.5866,
+    "per_class": {
+     "required": {
+      "precision": 0.5559,
+      "recall": 0.5547,
+      "f1": 0.5553,
+      "support": 10443
+     },
+     "preferred": {
+      "precision": 0.468,
+      "recall": 0.3766,
+      "f1": 0.4174,
+      "support": 6949
+     },
+     "neutral": {
+      "precision": 0.6752,
+      "recall": 0.7528,
+      "f1": 0.7119,
+      "support": 12000
+     }
+    },
+    "confusion_matrix": [
+     [
+      5793,
+      2024,
+      2626
+     ],
+     [
+      2613,
+      2617,
+      1719
+     ],
+     [
+      2015,
+      951,
+      9034
+     ]
+    ],
+    "train_seconds": 23.5,
+    "predict_ms_per_1000": 60.63
+   }
+  },
+  "best_model": "Linear SVM"
+ },
+ "skill_recommender": {
+  "apriori": {
+   "min_support": 0.01,
+   "min_confidence": 0.25,
+   "min_lift": 1.3,
+   "transactions": 25283,
+   "frequent_itemsets": {
+    "1": 92,
+    "2": 622,
+    "3": 548
+   },
+   "top_rules": [
+    {
+     "if": [
+      "Python",
+      "PyTorch"
+     ],
+     "then": "TensorFlow",
+     "support": 0.0112,
+     "confidence": 0.9071,
+     "lift": 51.885
+    },
+    {
+     "if": [
+      "Machine Learning",
+      "PyTorch"
+     ],
+     "then": "TensorFlow",
+     "support": 0.0118,
+     "confidence": 0.903,
+     "lift": 51.655
+    },
+    {
+     "if": [
+      "PyTorch"
+     ],
+     "then": "TensorFlow",
+     "support": 0.0133,
+     "confidence": 0.8984,
+     "lift": 51.389
+    },
+    {
+     "if": [
+      "Python",
+      "TensorFlow"
+     ],
+     "then": "PyTorch",
+     "support": 0.0112,
+     "confidence": 0.7711,
+     "lift": 52.129
+    },
+    {
+     "if": [
+      "Machine Learning",
+      "TensorFlow"
+     ],
+     "then": "PyTorch",
+     "support": 0.0118,
+     "confidence": 0.77,
+     "lift": 52.055
+    },
+    {
+     "if": [
+      "TensorFlow"
+     ],
+     "then": "PyTorch",
+     "support": 0.0133,
+     "confidence": 0.7602,
+     "lift": 51.389
+    },
+    {
+     "if": [
+      ".NET",
+      "Design Patterns"
+     ],
+     "then": "ASP.NET",
+     "support": 0.0108,
+     "confidence": 0.6213,
+     "lift": 23.983
+    },
+    {
+     "if": [
+      "C#",
+      "Design Patterns"
+     ],
+     "then": "ASP.NET",
+     "support": 0.0106,
+     "confidence": 0.5925,
+     "lift": 22.871
+    },
+    {
+     "if": [
+      "Tableau"
+     ],
+     "then": "Power BI",
+     "support": 0.0106,
+     "confidence": 0.6036,
+     "lift": 20.992
+    },
+    {
+     "if": [
+      "ASP.NET",
+      "Design Patterns"
+     ],
+     "then": ".NET",
+     "support": 0.0108,
+     "confidence": 0.7829,
+     "lift": 14.86
+    },
+    {
+     "if": [
+      "C#",
+      "ASP.NET"
+     ],
+     "then": ".NET",
+     "support": 0.0147,
+     "confidence": 0.7799,
+     "lift": 14.803
+    },
+    {
+     "if": [
+      "Deep Learning"
+     ],
+     "then": "Machine Learning",
+     "support": 0.0134,
+     "confidence": 0.9187,
+     "lift": 12.528
+    },
+    {
+     "if": [
+      "Artificial Intelligence",
+      "Natural Language Processing"
+     ],
+     "then": "Machine Learning",
+     "support": 0.0108,
+     "confidence": 0.9103,
+     "lift": 12.414
+    },
+    {
+     "if": [
+      "C#",
+      "Angular"
+     ],
+     "then": ".NET",
+     "support": 0.0123,
+     "confidence": 0.766,
+     "lift": 14.54
+    },
+    {
+     "if": [
+      "C#",
+      "Design Patterns"
+     ],
+     "then": ".NET",
+     "support": 0.0136,
+     "confidence": 0.7599,
+     "lift": 14.424
+    },
+    {
+     "if": [
+      "ASP.NET",
+      "SQL"
+     ],
+     "then": ".NET",
+     "support": 0.0111,
+     "confidence": 0.7574,
+     "lift": 14.377
+    },
+    {
+     "if": [
+      "Python",
+      "PyTorch"
+     ],
+     "then": "Machine Learning",
+     "support": 0.011,
+     "confidence": 0.891,
+     "lift": 12.151
+    },
+    {
+     "if": [
+      "TensorFlow",
+      "PyTorch"
+     ],
+     "then": "Machine Learning",
+     "support": 0.0118,
+     "confidence": 0.8869,
+     "lift": 12.095
+    },
+    {
+     "if": [
+      "PyTorch"
+     ],
+     "then": "Machine Learning",
+     "support": 0.0131,
+     "confidence": 0.8824,
+     "lift": 12.033
+    },
+    {
+     "if": [
+      "Python",
+      "TensorFlow"
+     ],
+     "then": "Machine Learning",
+     "support": 0.0128,
+     "confidence": 0.8801,
+     "lift": 12.002
+    },
+    {
+     "if": [
+      "TensorFlow"
+     ],
+     "then": "Machine Learning",
+     "support": 0.0153,
+     "confidence": 0.8756,
+     "lift": 11.94
+    },
+    {
+     "if": [
+      "Tableau"
+     ],
+     "then": "Data Visualization",
+     "support": 0.0102,
+     "confidence": 0.5811,
+     "lift": 17.223
+    },
+    {
+     "if": [
+      "Hibernate",
+      "System Design"
+     ],
+     "then": "Spring Framework",
+     "support": 0.0168,
+     "confidence": 0.86,
+     "lift": 11.396
+    },
+    {
+     "if": [
+      "Python",
+      "Natural Language Processing"
+     ],
+     "then": "Machine Learning",
+     "support": 0.0137,
+     "confidence": 0.846,
+     "lift": 11.536
+    },
+    {
+     "if": [
+      "Kubernetes",
+      "Problem Solving"
+     ],
+     "then": "Docker",
+     "support": 0.0124,
+     "confidence": 0.8396,
+     "lift": 11.561
+    }
+   ],
+   "rule_count": 1939
+  },
+  "kmeans": {
+   "k": 12,
+   "silhouette": {
+    "6": 0.0894,
+    "7": 0.0951,
+    "8": 0.102,
+    "9": 0.1077,
+    "10": 0.1123,
+    "11": 0.1188,
+    "12": 0.1251
+   },
+   "inertia": {
+    "6": 17265.8,
+    "7": 16949.6,
+    "8": 16757.1,
+    "9": 16440.4,
+    "10": 16169.4,
+    "11": 16010.8,
+    "12": 15797.8
+   },
+   "postings_clustered": 21233,
+   "clusters": [
+    {
+     "id": 3,
+     "size": 4010,
+     "share": 0.1889,
+     "name": "REST APIs \u00b7 Problem Solving \u00b7 SQL",
+     "top_skills": [
+      {
+       "skill": "REST APIs",
+       "frequency": 0.2569
+      },
+      {
+       "skill": "Problem Solving",
+       "frequency": 0.1713
+      },
+      {
+       "skill": "SQL",
+       "frequency": 0.2247
+      },
+      {
+       "skill": "Agile Methodologies",
+       "frequency": 0.1985
+      },
+      {
+       "skill": "Communication Skills",
+       "frequency": 0.1496
+      },
+      {
+       "skill": "Software Engineering",
+       "frequency": 0.1496
+      },
+      {
+       "skill": "Git",
+       "frequency": 0.1631
+      },
+      {
+       "skill": "Python",
+       "frequency": 0.207
+      }
+     ],
+     "main_role": "Software Developer",
+     "main_role_share": 0.57
+    },
+    {
+     "id": 1,
+     "size": 2499,
+     "share": 0.1177,
+     "name": "JavaScript \u00b7 HTML \u00b7 CSS",
+     "top_skills": [
+      {
+       "skill": "JavaScript",
+       "frequency": 0.8275
+      },
+      {
+       "skill": "HTML",
+       "frequency": 0.6042
+      },
+      {
+       "skill": "CSS",
+       "frequency": 0.6563
+      },
+      {
+       "skill": "React",
+       "frequency": 0.4722
+      },
+      {
+       "skill": "Web Development",
+       "frequency": 0.4642
+      },
+      {
+       "skill": "Angular",
+       "frequency": 0.2765
+      },
+      {
+       "skill": "TypeScript",
+       "frequency": 0.2153
+      },
+      {
+       "skill": "Node.js",
+       "frequency": 0.2001
+      }
+     ],
+     "main_role": "Web / Full Stack Developer",
+     "main_role_share": 0.537
+    },
+    {
+     "id": 2,
+     "size": 2159,
+     "share": 0.1017,
+     "name": "DevOps \u00b7 Kubernetes \u00b7 CI/CD",
+     "top_skills": [
+      {
+       "skill": "DevOps",
+       "frequency": 0.6628
+      },
+      {
+       "skill": "Kubernetes",
+       "frequency": 0.5873
+      },
+      {
+       "skill": "CI/CD",
+       "frequency": 0.6744
+      },
+      {
+       "skill": "Docker",
+       "frequency": 0.447
+      },
+      {
+       "skill": "Microsoft Azure",
+       "frequency": 0.4988
+      },
+      {
+       "skill": "Amazon Web Services",
+       "frequency": 0.3367
+      },
+      {
+       "skill": "Git",
+       "frequency": 0.3696
+      },
+      {
+       "skill": "Google Cloud Platform",
+       "frequency": 0.2585
+      }
+     ],
+     "main_role": "DevOps / Cloud",
+     "main_role_share": 0.506
+    },
+    {
+     "id": 11,
+     "size": 1912,
+     "share": 0.09,
+     "name": "Software Testing \u00b7 Selenium \u00b7 Statistics",
+     "top_skills": [
+      {
+       "skill": "Software Testing",
+       "frequency": 0.9278
+      },
+      {
+       "skill": "Selenium",
+       "frequency": 0.4252
+      },
+      {
+       "skill": "Statistics",
+       "frequency": 0.2024
+      },
+      {
+       "skill": "Agile Methodologies",
+       "frequency": 0.272
+      },
+      {
+       "skill": "Java",
+       "frequency": 0.2803
+      },
+      {
+       "skill": "CI/CD",
+       "frequency": 0.2223
+      },
+      {
+       "skill": "Postman",
+       "frequency": 0.0868
+      },
+      {
+       "skill": "Software Engineering",
+       "frequency": 0.1412
+      }
+     ],
+     "main_role": "QA / Testing",
+     "main_role_share": 0.71
+    },
+    {
+     "id": 5,
+     "size": 1866,
+     "share": 0.0879,
+     "name": "Spring Framework \u00b7 Java \u00b7 System Design",
+     "top_skills": [
+      {
+       "skill": "Spring Framework",
+       "frequency": 0.8537
+      },
+      {
+       "skill": "Java",
+       "frequency": 0.9614
+      },
+      {
+       "skill": "System Design",
+       "frequency": 0.6667
+      },
+      {
+       "skill": "Hibernate",
+       "frequency": 0.3376
+      },
+      {
+       "skill": "REST APIs",
+       "frequency": 0.3558
+      },
+      {
+       "skill": "Web Development",
+       "frequency": 0.2819
+      },
+      {
+       "skill": "Apache Kafka",
+       "frequency": 0.1715
+      },
+      {
+       "skill": "Angular",
+       "frequency": 0.1886
+      }
+     ],
+     "main_role": "Software Developer",
+     "main_role_share": 0.699
+    },
+    {
+     "id": 8,
+     "size": 1661,
+     "share": 0.0782,
+     "name": "C# \u00b7 .NET \u00b7 ASP.NET",
+     "top_skills": [
+      {
+       "skill": "C#",
+       "frequency": 0.9555
+      },
+      {
+       "skill": ".NET",
+       "frequency": 0.4672
+      },
+      {
+       "skill": "ASP.NET",
+       "frequency": 0.286
+      },
+      {
+       "skill": "CSS",
+       "frequency": 0.4883
+      },
+      {
+       "skill": "Design Patterns",
+       "frequency": 0.2252
+      },
+      {
+       "skill": "SQL",
+       "frequency": 0.3588
+      },
+      {
+       "skill": "REST APIs",
+       "frequency": 0.2595
+      },
+      {
+       "skill": "Angular",
+       "frequency": 0.1704
+      }
+     ],
+     "main_role": "Software Developer",
+     "main_role_share": 0.781
+    },
+    {
+     "id": 6,
+     "size": 1563,
+     "share": 0.0736,
+     "name": "Machine Learning \u00b7 Artificial Intelligence \u00b7 Large Language Models",
+     "top_skills": [
+      {
+       "skill": "Machine Learning",
+       "frequency": 0.8439
+      },
+      {
+       "skill": "Artificial Intelligence",
+       "frequency": 0.5534
+      },
+      {
+       "skill": "Large Language Models",
+       "frequency": 0.3999
+      },
+      {
+       "skill": "Python",
+       "frequency": 0.6596
+      },
+      {
+       "skill": "Natural Language Processing",
+       "frequency": 0.3077
+      },
+      {
+       "skill": "Data Science",
+       "frequency": 0.3321
+      },
+      {
+       "skill": "TensorFlow",
+       "frequency": 0.2674
+      },
+      {
+       "skill": "PyTorch",
+       "frequency": 0.2265
+      }
+     ],
+     "main_role": "Data Scientist / ML Engineer",
+     "main_role_share": 0.812
+    },
+    {
+     "id": 10,
+     "size": 1388,
+     "share": 0.0654,
+     "name": "Data Warehousing \u00b7 Apache Spark \u00b7 SQL",
+     "top_skills": [
+      {
+       "skill": "Data Warehousing",
+       "frequency": 0.737
+      },
+      {
+       "skill": "Apache Spark",
+       "frequency": 0.3862
+      },
+      {
+       "skill": "SQL",
+       "frequency": 0.6729
+      },
+      {
+       "skill": "Python",
+       "frequency": 0.5886
+      },
+      {
+       "skill": "Big Data",
+       "frequency": 0.2082
+      },
+      {
+       "skill": "Scala",
+       "frequency": 0.1729
+      },
+      {
+       "skill": "Apache Hadoop",
+       "frequency": 0.1506
+      },
+      {
+       "skill": "Microsoft Azure",
+       "frequency": 0.3163
+      }
+     ],
+     "main_role": "Data Engineer",
+     "main_role_share": 0.594
+    },
+    {
+     "id": 7,
+     "size": 1138,
+     "share": 0.0536,
+     "name": "C++ \u00b7 Linux \u00b7 Embedded Systems",
+     "top_skills": [
+      {
+       "skill": "C++",
+       "frequency": 1.0
+      },
+      {
+       "skill": "Linux",
+       "frequency": 0.2487
+      },
+      {
+       "skill": "Embedded Systems",
+       "frequency": 0.1186
+      },
+      {
+       "skill": "Python",
+       "frequency": 0.3295
+      },
+      {
+       "skill": "C Programming",
+       "frequency": 0.0993
+      },
+      {
+       "skill": "CSS",
+       "frequency": 0.2531
+      },
+      {
+       "skill": "Java",
+       "frequency": 0.2733
+      },
+      {
+       "skill": "Software Engineering",
+       "frequency": 0.1986
+      }
+     ],
+     "main_role": "Software Developer",
+     "main_role_share": 0.803
+    },
+    {
+     "id": 4,
+     "size": 1110,
+     "share": 0.0523,
+     "name": "Computer Networks \u00b7 Cyber Security \u00b7 Network Protocols",
+     "top_skills": [
+      {
+       "skill": "Computer Networks",
+       "frequency": 0.8171
+      },
+      {
+       "skill": "Cyber Security",
+       "frequency": 0.3676
+      },
+      {
+       "skill": "Network Protocols",
+       "frequency": 0.1802
+      },
+      {
+       "skill": "Linux",
+       "frequency": 0.2018
+      },
+      {
+       "skill": "Communication Skills",
+       "frequency": 0.1523
+      },
+      {
+       "skill": "Software Engineering",
+       "frequency": 0.1432
+      },
+      {
+       "skill": "Microsoft Azure",
+       "frequency": 0.1676
+      },
+      {
+       "skill": "Ethical Hacking",
+       "frequency": 0.0541
+      }
+     ],
+     "main_role": "Network / IT Support",
+     "main_role_share": 0.349
+    },
+    {
+     "id": 9,
+     "size": 1002,
+     "share": 0.0472,
+     "name": "Data Analysis \u00b7 Power BI \u00b7 Data Visualization",
+     "top_skills": [
+      {
+       "skill": "Data Analysis",
+       "frequency": 0.6477
+      },
+      {
+       "skill": "Power BI",
+       "frequency": 0.5359
+      },
+      {
+       "skill": "Data Visualization",
+       "frequency": 0.498
+      },
+      {
+       "skill": "Tableau",
+       "frequency": 0.3513
+      },
+      {
+       "skill": "Business Analytics",
+       "frequency": 0.3014
+      },
+      {
+       "skill": "SQL",
+       "frequency": 0.5988
+      },
+      {
+       "skill": "Python",
+       "frequency": 0.4491
+      },
+      {
+       "skill": "Data Warehousing",
+       "frequency": 0.2086
+      }
+     ],
+     "main_role": "Data Analyst / BI",
+     "main_role_share": 0.566
+    },
+    {
+     "id": 0,
+     "size": 925,
+     "share": 0.0436,
+     "name": "Project Management \u00b7 Cyber Security \u00b7 Agile Methodologies",
+     "top_skills": [
+      {
+       "skill": "Project Management",
+       "frequency": 1.0
+      },
+      {
+       "skill": "Cyber Security",
+       "frequency": 0.1395
+      },
+      {
+       "skill": "Agile Methodologies",
+       "frequency": 0.2292
+      },
+      {
+       "skill": "Problem Solving",
+       "frequency": 0.1795
+      },
+      {
+       "skill": "Communication Skills",
+       "frequency": 0.1686
+      },
+      {
+       "skill": "Leadership",
+       "frequency": 0.133
+      },
+      {
+       "skill": "Teamwork",
+       "frequency": 0.1481
+      },
+      {
+       "skill": "Technical Writing",
+       "frequency": 0.1211
+      }
+     ],
+     "main_role": "Software Developer",
+     "main_role_share": 0.396
+    }
+   ]
+  }
+ },
+ "training_minutes": 10.3,
+ "pipeline": {
+  "datasets": {
+   "files": {
+    "job_postings_2024.csv.gz": 40000,
+    "job_postings_2025.csv.gz": 97929
+   },
+   "raw_rows": 137929,
+   "description": "Real job postings: an Indian job portal scrape (Oct 2025, with full descriptions) and a LinkedIn sample (Jan 2024, skill lists); see README \u2192 Data sources."
+  },
+  "preprocessing": [
+   {
+    "step": "Removed rows without a job title",
+    "count": 0
+   },
+   {
+    "step": "Removed exact duplicate postings (same title, company, skills and description)",
+    "count": 7640
+   },
+   {
+    "step": "Postings kept for training",
+    "count": 130289
+   },
+   {
+    "step": "Postings with a job description (HTML tags removed, text normalised)",
+    "count": 90283
+   },
+   {
+    "step": "Postings with skill tags",
+    "count": 129736
+   },
+   {
+    "step": "Description sentences split and assigned to their heading (Required / Good to have / Responsibilities)",
+    "count": 238053
+   },
+   {
+    "step": "Description sentences without a heading, labelled by Model 2",
+    "count": 376991
+   },
+   {
+    "step": "Skills recognised with the 188-skill taxonomy (posting\u2013skill links)",
+    "count": 300181
+   },
+   {
+    "step": "Postings with at least one recognised skill",
+    "count": 89517
+   },
+   {
+    "step": "Required / preferred / unspecified skill links",
+    "count": "72,772 / 20,278 / 207,131"
+   },
+   {
+    "step": "Postings with a stated experience range (used for the entry-level filter)",
+    "count": 88246
+   },
+   {
+    "step": "Job-role labels from title rules (weak supervision)",
+    "count": 23627
+   },
+   {
+    "step": "Extra IT postings whose role was predicted by Model 1 (vague titles)",
+    "count": 1656
+   }
+  ],
+  "features": [
+   {
+    "model": "Model 1: job-role classifier",
+    "features": "TF-IDF word 1\u20132-grams over skill tokens (weighted \u00d72) + description; job title removed; vocabulary 80,000 terms, sublinear TF, min document frequency 3"
+   },
+   {
+    "model": "Model 2: requirement-level classifier",
+    "features": "TF-IDF word 1\u20132-grams per sentence, heading words removed; vocabulary 60,000 terms, sublinear TF, min document frequency 3"
+   },
+   {
+    "model": "Model 3a: Apriori",
+    "features": "Binary skill baskets: 25,283 IT postings \u00d7 188 skills"
+   },
+   {
+    "model": "Model 3b: K-Means",
+    "features": "TF-IDF-weighted skill vectors, L2-normalised, cosine geometry; postings with \u2265 2 skills"
+   }
+  ],
+  "training": [
+   {
+    "model": "Model 1",
+    "split": "71,688 train / 17,923 test (80/20, stratified, de-duplicated, random seed 42)",
+    "algorithms": [
+     "Baseline (majority class)",
+     "Complement Naive Bayes",
+     "Logistic Regression",
+     "Linear SVM",
+     "Random Forest"
+    ],
+    "selected": "Linear SVM",
+    "selection": "highest macro-F1 on the test set; probabilities calibrated (sigmoid, 3-fold)"
+   },
+   {
+    "model": "Model 2",
+    "split": "117,564 train / 29,392 test (80/20, stratified, de-duplicated, random seed 42)",
+    "algorithms": [
+     "Baseline (majority class)",
+     "Multinomial Naive Bayes",
+     "Logistic Regression",
+     "Linear SVM",
+     "Random Forest"
+    ],
+    "selected": "Linear SVM",
+    "selection": "highest macro-F1 on the test set"
+   },
+   {
+    "model": "Model 3",
+    "split": "unsupervised: all IT postings",
+    "algorithms": [
+     "Apriori (min support 1%, min confidence 25%, min lift 1.3, up to 3 skills)",
+     "K-Means (k = 6\u202612, 5 initialisations, random seed 42)"
+    ],
+    "selected": "1,939 rules; k = 12",
+    "selection": "k with the highest silhouette score"
+   }
+  ]
+ }
+}

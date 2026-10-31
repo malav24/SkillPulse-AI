@@ -1,0 +1,175 @@
+{
+  "version": "1.0.0",
+  "description": "Configurable heading and field patterns for Indian syllabus PDFs. Patterns are Python regular expressions, matched case-insensitively against a single trimmed line. Add patterns here when a university uses different headings; the manual correction screen handles anything the rules miss.",
+  "section_headings": {
+    "objectives": [
+      "^(course|subject|paper)?\\s*(learning\\s+)?objectives?\\b",
+      "^(course\\s+)?aims?(\\s+and\\s+objectives)?\\s*[:\\-]?\\s*$",
+      "^the\\s+objectives?\\s+of\\s+(this|the)\\s+course"
+    ],
+    "outcomes": [
+      "^(course|learning|programme|program)\\s+outcomes?\\b",
+      "^c\\.?\\s?o\\.?s?\\s*[:\\-]\\s*$",
+      "^outcomes?\\s*[:\\-]?\\s*$",
+      "^(after|upon|on)\\s+(successful\\s+)?completion\\s+of\\s+(this|the)\\s+course",
+      "^at\\s+the\\s+end\\s+of\\s+(this|the)\\s+course",
+      "^students?\\s+will\\s+be\\s+able\\s+to\\s*[:\\-]?\\s*$"
+    ],
+    "unit": [
+      "^(unit|module|chapter|block)\\s*[\\-–:.]?\\s*(?P<num>[ivxlc]+|\\d+)\\b\\s*[\\-–:.)]*\\s*(?P<title>.*)$"
+    ],
+    "practical": [
+      "^(list\\s+of\\s+)?(practicals?|experiments?|lab(oratory)?\\s*(work|exercises|experiments|assignments)?|practical\\s+work)\\b\\s*[:\\-]?",
+      "^(suggested|indicative)\\s+(list\\s+of\\s+)?(practicals?|experiments?)"
+    ],
+    "project": [
+      "^(mini[\\s\\-]?)?projects?\\b\\s*[:\\-]?",
+      "^(assignments?|term\\s+work|case\\s+stud(y|ies)|tutorials?)\\b\\s*[:\\-]?\\s*$"
+    ],
+    "textbooks": [
+      "^text\\s*[\\-]?\\s*books?\\b",
+      "^(prescribed|recommended)\\s+(text\\s*)?books?\\b"
+    ],
+    "references": [
+      "^(reference\\s+books?|references?|suggested\\s+readings?|reading\\s+list|further\\s+readings?|web\\s+resources|online\\s+resources)\\b"
+    ],
+    "assessment": [
+      "^(evaluation|assessment|examination|teaching)\\s+(scheme|pattern|methods?|and\\s+evaluation)\\b",
+      "^(marks\\s+distribution|scheme\\s+of\\s+(examination|evaluation))\\b"
+    ]
+  },
+  "metadata_fields": {
+    "course_code": [
+      "(?i:(course|subject|paper)\\s*code)\\s*[:\\-–]?\\s*(?P<v>[A-Za-z]{2,6}[\\s\\-]?\\d{2,4}[A-Za-z]?)",
+      "^(?P<v>[A-Z]{2,6}\\d{3,4}[A-Z]?)\\b"
+    ],
+    "course_title": [
+      "(?i:(course|subject|paper)\\s*(title|name))\\s*[:\\-–]\\s*(?P<v>[^\\n|]{3,120})",
+      "^(?:[A-Z]{2,6}[\\s\\-]?\\d{2,4}[A-Z]?)\\s*[:\\-–]\\s*(?P<v>[A-Za-z][^\\n|]{3,120})$"
+    ],
+    "semester": [
+      "semester\\s*[:\\-–]?\\s*(?P<v>[ivx]{1,4}|\\d{1,2})\\b",
+      "\\b(?P<v>\\d{1,2})(st|nd|rd|th)\\s+sem(ester)?\\b",
+      "\\bsem(ester)?\\s*[\\-–:]?\\s*(?P<v>[ivx]{1,4}|\\d{1,2})\\b"
+    ],
+    "academic_year": [
+      "(academic\\s+year|a\\.?y\\.?|session)\\s*[:\\-–]?\\s*(?P<v>(19|20)\\d{2}\\s*[\\-–/]\\s*(19|20)?\\d{2})",
+      "\\b(?P<v>20\\d{2}\\s*[\\-–/]\\s*(20)?\\d{2})\\b"
+    ],
+    "admission_batch": [
+      "(admission\\s+)?batch\\s*[:\\-–]?\\s*(?P<v>(19|20)\\d{2}(\\s*[\\-–/]\\s*(19|20)?\\d{2})?)",
+      "(students\\s+)?admitted\\s+(in|from)\\s+(the\\s+)?(academic\\s+year\\s+)?(?P<v>20\\d{2}(\\s*[\\-–/]\\s*(20)?\\d{2})?)"
+    ],
+    "credits": [
+      "\\bcredits?\\s*[:\\-–]?\\s*(?P<v>\\d{1,2}(\\.\\d)?)\\b",
+      "\\b(?P<v>\\d{1,2}(\\.\\d)?)\\s+credits?\\b"
+    ],
+    "university_name": [
+      "^(?P<v>[A-Z][A-Z.&'\\s,\\-]{2,90}\\bUNIVERSITY\\b[A-Z.&'\\s,\\-]{0,40})$",
+      "^(?P<v>[A-Z][A-Za-z.&'\\s,\\-]{2,90}\\b(University|Vishwavidyalaya|Vidyapeeth|Vidyapith))\\b.*$",
+      "^(?P<v>(University|Indian\\s+Institute)\\s+of\\s+[A-Z][A-Za-z.&'\\s,\\-]{2,80})$",
+      "^(?P<v>[A-Z][A-Za-z.&'\\s,\\-]{2,90}\\bInstitute\\s+of\\s+(Technology|Science|Engineering)[A-Za-z.&'\\s,\\-]{0,40})$"
+    ],
+    "programme_name": [
+      "(?i:(programme|program|degree)\\s*(name)?)\\s*[:\\-–]\\s*(?P<v>[^\\n|]{3,120})",
+      "^(?P<v>(B\\.?\\s?Tech|B\\.?\\s?E\\.?|M\\.?\\s?Tech|M\\.?\\s?E\\.?|BCA|MCA|B\\.?\\s?Sc|M\\.?\\s?Sc|MBA|BBA|B\\.?\\s?Com|M\\.?\\s?Com|Diploma)\\b[^\\n|]{0,100})$"
+    ]
+  },
+  "metadata_scan_lines": 60,
+  "outcome_item_patterns": [
+    "^(?P<code>C\\.?O\\.?\\s?\\d{1,2}|CLO\\s?\\d{1,2}|LO\\s?\\d{1,2})\\s*[:.)\\-–]\\s*(?P<text>.+)$",
+    "^(?P<code>\\d{1,2}|[a-h]|[ivx]{1,4})\\s*[.)]\\s+(?P<text>.+)$",
+    "^[\\u2022\\u25cf\\u25aa\\-*•]\\s*(?P<text>.+)$"
+  ],
+  "list_item_patterns": [
+    "^(?P<code>\\d{1,2}|[a-h]|[ivx]{1,4})\\s*[.)]\\s+(?P<text>.+)$",
+    "^(experiment|practical|lab|exercise)\\s*(no\\.?)?\\s*(?P<code>\\d{1,2})\\s*[:.)\\-–]\\s*(?P<text>.+)$",
+    "^[\\u2022\\u25cf\\u25aa\\-*•]\\s*(?P<text>.+)$"
+  ],
+  "bloom_verbs": {
+    "remember": [
+      "define",
+      "list",
+      "recall",
+      "identify",
+      "state",
+      "name",
+      "recognise",
+      "recognize"
+    ],
+    "understand": [
+      "explain",
+      "describe",
+      "summarize",
+      "summarise",
+      "discuss",
+      "interpret",
+      "classify",
+      "understand",
+      "illustrate"
+    ],
+    "apply": [
+      "apply",
+      "implement",
+      "use",
+      "solve",
+      "demonstrate",
+      "compute",
+      "execute",
+      "develop",
+      "write",
+      "program",
+      "construct"
+    ],
+    "analyze": [
+      "analyze",
+      "analyse",
+      "compare",
+      "differentiate",
+      "examine",
+      "distinguish",
+      "investigate"
+    ],
+    "evaluate": [
+      "evaluate",
+      "assess",
+      "justify",
+      "critique",
+      "judge",
+      "select",
+      "validate"
+    ],
+    "create": [
+      "design",
+      "create",
+      "build",
+      "formulate",
+      "propose",
+      "devise",
+      "compose",
+      "plan"
+    ]
+  },
+  "case_sensitive_fields": [
+    "course_code",
+    "course_title",
+    "university_name",
+    "programme_name"
+  ],
+  "course_heading": {
+    "description": "Multi-course syllabus PDFs: an ALL-CAPS line followed within `max_lookahead` lines by a programme/semester line starts a new course.",
+    "follower_patterns": [
+      "^(B\\.?\\s?Tech|M\\.?\\s?Tech|B\\.?\\s?E|M\\.?\\s?E|BCA|MCA|B\\.?\\s?Sc|M\\.?\\s?Sc|MBA|BBA)\\.?\\b.{0,60}\\b(Sem|Semester|Year)\\b",
+      "^(Course|Subject|Paper)\\s*Code\\s*[:\\-]",
+      "^(Semester|Sem)\\s*[:\\-]?\\s*([IVX]+|\\d+)\\b"
+    ],
+    "max_lookahead": 2,
+    "min_letters": 6,
+    "max_length": 90
+  },
+  "outcome_intro_patterns": [
+    "^(after|upon|on|at the end of)\\b.{0,80}\\b(course|learning|completion|completing|studying)\\b",
+    "\\bable to\\s*:?\\s*$",
+    "^(students?|learners?) (will|should|must) be able to"
+  ]
+}
