@@ -210,11 +210,11 @@ def extract_pdf(path: str, settings: Settings) -> ExtractionResult:
             else:
                 result.pages.append(PageResult(page_no, text, len(text), "none", "empty"))
                 try:
-                    has_images = bool(page.get_images(full=False))
+                    has_visuals = bool(page.get_images(full=False)) or bool(page.get_drawings())
                 except Exception:
-                    has_images = False
-                if has_images:
-                    needs_ocr.append(idx)          # a scanned page: an image with no text layer
+                    has_visuals = False
+                if has_visuals:
+                    needs_ocr.append(idx)          # a scanned or vector-rendered page with no text layer
                 else:
                     without_images += 1            # blank, or the PDF's content is damaged
         result.unreadable_without_images = without_images

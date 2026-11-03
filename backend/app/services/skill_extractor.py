@@ -260,9 +260,13 @@ def candidate_phrases(text: str, model_name: str) -> list[tuple[int, int, str]]:
     if has_parser:
         doc = nlp(text)
         for chunk in doc.noun_chunks:
-            p = chunk.text.strip()
-            if 4 <= len(p) <= 60 and 1 <= len(p.split()) <= 5:
-                phrases.append((chunk.start_char, chunk.end_char, p))
+            # Semicolons and colons separate distinct syllabus topics/clauses
+            for sub in re.split(r"[;:]+", chunk.text):
+                p = sub.strip()
+                if 4 <= len(p) <= 60 and 1 <= len(p.split()) <= 5:
+                    start = text.find(p, chunk.start_char)
+                    if start != -1:
+                        phrases.append((start, start + len(p), p))
         return phrases
     for m in re.finditer(r"[^,;:.()\n\[\]]+", text):
         p = m.group(0).strip()

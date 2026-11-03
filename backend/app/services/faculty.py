@@ -3,6 +3,7 @@ model → recommendations. One background worker processes uploads in order (SQL
 """
 from __future__ import annotations
 
+import json
 import logging
 import queue
 import threading
@@ -241,5 +242,6 @@ def analysis_brief(a: FacultyAnalysis) -> dict:
 def analysis_result(db, a: FacultyAnalysis, full: bool = True) -> dict:
     out = analysis_brief(a)
     if a.status == "done" and a.result:
-        out.update(a.result if full else {"summary": a.result.get("summary")})
+        res = json.loads(a.result) if isinstance(a.result, str) else a.result
+        out.update(res if full else {"summary": res.get("summary")})
     return out

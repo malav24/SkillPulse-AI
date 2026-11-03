@@ -118,9 +118,26 @@ def _match_heading(rules: Rules, text: str):
 
 _ACRONYMS = {"AI", "ML", "IOT", "OOP", "DBMS", "UI", "UX", "AR", "VR", "NLP", "OS", "JS", "IT", "II", "III", "IV"}
 _SMALL_WORDS = {"and", "of", "the", "in", "for", "to", "with", "on", "a", "an", "through", "or"}
+_TEACHING_PLAN_RE = re.compile(r"teaching\s+plan", re.I)
+_COURSE_CODE_RE = re.compile(r"^([A-Z][A-Za-z0-9\s,&–-]{4,70})\s*\(([A-Z]{2,4}\s*\d{3,4}[A-Z]?)\)\s*$", re.I)
 
 
 def _course_title(text: str) -> str:
+    m = _COURSE_CODE_RE.match(text.strip(" :-–.|"))
+    if m:
+        title_part = m.group(1).strip()
+        code_part = m.group(2).strip().upper()
+        words = re.sub(r"\s+", " ", title_part).split(" ")
+        out = []
+        for i, w in enumerate(words):
+            lw = w.lower()
+            if i and lw in _SMALL_WORDS:
+                out.append(lw)
+            elif w.strip("()&/,") in _ACRONYMS:
+                out.append(w)
+            else:
+                out.append(w[:1].upper() + w[1:].lower())
+        return f"{' '.join(out)} ({code_part})"
     words = re.sub(r"\s+", " ", text.strip(" :-–.|")).split(" ")
     out = []
     for i, w in enumerate(words):
@@ -135,10 +152,17 @@ def _course_title(text: str) -> str:
 
 
 def _is_course_heading(rules: Rules, lines: list[Line], i: int) -> bool:
-    """ALL-CAPS line followed (within a couple of lines) by a programme/semester line."""
+    """ALL-CAPS line followed by programme/semester, or Teaching Plan course header."""
+    text = lines[i].text.strip()
+    m = _COURSE_CODE_RE.match(text)
+    if m:
+        start = max(0, i - 3)
+        end = min(len(lines), i + 3)
+        if any(_TEACHING_PLAN_RE.search(lines[j].text) for j in range(start, end)):
+            return True
+
     if not rules.course_followers:
         return False
-    text = lines[i].text
     letters = [c for c in text if c.isalpha()]
     if len(letters) < rules.course_min_letters or len(text) > rules.course_max_length or ":" in text:
         return False

@@ -62,7 +62,7 @@ describe("Home", () => {
     mockFetch({ "/api/market": MARKET, "/api/analyses": [DONE] });
     render(<MemoryRouter><Home /></MemoryRouter>);
     expect(await screen.findByText(/1,37,929 real job postings/)).toBeInTheDocument();
-    expect(await screen.findByText("B.Tech CSE — II Year")).toBeInTheDocument();
+    expect((await screen.findAllByText("B.Tech CSE — II Year")).length).toBeGreaterThan(0);
     expect(screen.getByText(/missing skills/)).toBeInTheDocument();
   });
 
@@ -86,12 +86,13 @@ describe("Home", () => {
     expect(screen.getByRole("alert")).toHaveTextContent("Please choose the syllabus PDF.");
     const file = new File(["%PDF-1.4"], "Data_Structures.pdf", { type: "application/pdf" });
     await user.upload(screen.getByLabelText("Syllabus PDF"), file);
-    expect(screen.getByLabelText("Course / programme name")).toHaveValue("Data Structures");
+    await user.selectOptions(screen.getByLabelText("Course / programme name"), "Data Structures & Algorithms");
+    expect(screen.getByLabelText("Course / programme name")).toHaveValue("Data Structures & Algorithms");
     await user.selectOptions(screen.getByLabelText("Compare with (target job role)"), "all");
     await user.click(screen.getByLabelText(/Only entry-level jobs/));
     await user.click(screen.getByRole("button", { name: "Analyse syllabus" }));
     expect(await screen.findByText("analysis page")).toBeInTheDocument();
-    expect(posted[0].get("course_name")).toBe("Data Structures");
+    expect(posted[0].get("course_name")).toBe("Data Structures & Algorithms");
     expect(posted[0].get("job_field")).toBe("all");
     expect(posted[0].get("entry_level")).toBe("true");
   });

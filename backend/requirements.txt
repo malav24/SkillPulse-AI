@@ -10,7 +10,7 @@ psycopg2-binary==2.9.10
 PyMuPDF==1.25.5
 pytesseract==0.3.13      # uses Tesseract OCR when it is installed
 rapidocr==3.10.0          # OCR for scanned PDFs without installing anything else (models bundled)
-onnxruntime==1.31.0
+onnxruntime>=1.20.0
 Pillow==11.2.1
 spacy==3.8.7
 scikit-learn==1.6.1
