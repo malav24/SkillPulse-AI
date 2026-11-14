@@ -72,6 +72,14 @@ export interface Bundle {
   missing: string[];
 }
 
+export interface CareerReadinessRole {
+  role: string;
+  readiness_pct: number;
+  covered_skills: string[];
+  missing_skills: string[];
+  total_core_skills: number;
+}
+
 export interface Analysis {
   id: number;
   course_name: string;
@@ -92,6 +100,7 @@ export interface Analysis {
   courses?: CourseSkills[];
   roles?: RoleProb[];
   bundles?: Bundle[];
+  career_readiness?: CareerReadinessRole[];
   models?: {
     role_classifier: { algorithm: string; accuracy: number };
     requirement_classifier: { algorithm: string; accuracy: number };

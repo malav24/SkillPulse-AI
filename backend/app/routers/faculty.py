@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
+from pydantic import BaseModel
 from sqlalchemy import func, select, text
 from sqlalchemy.orm import Session
 
@@ -116,3 +117,35 @@ def delete(analysis_id: int, db: Session = Depends(get_db)):
                 if stored:
                     from ..storage import remove_files
                     remove_files([stored])
+
+
+class RecomparePayload(BaseModel):
+    job_field: str = "it"
+    entry_level: bool = False
+
+
+@router.post("/analyses/{analysis_id}/recompare", summary="Recalculate syllabus comparison for a different role or experience level without re-uploading")
+def recompare(analysis_id: int, payload: RecomparePayload, db: Session = Depends(get_db)):
+    a = _get(db, analysis_id)
+    if a.status != "done" or not a.document:
+        raise HTTPException(400, "Only completed analyses can be recompared")
+    if not faculty.valid_job_field(payload.job_field):
+        raise HTTPException(422, "Unknown job field")
+
+    from ..services.market_model import get_market, market_ready
+    from ..services.comparison import compare
+
+    ok, err = market_ready()
+    if not ok:
+        raise HTTPException(503, err)
+
+    try:
+        result = compare(db, a.document, get_market(), payload.job_field, payload.entry_level, a.course_name)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc))
+
+    a.job_field = payload.job_field
+    a.entry_level = payload.entry_level
+    a.result = result
+    db.commit()
+    return faculty.analysis_result(db, a)

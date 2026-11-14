@@ -225,6 +225,22 @@ def compare(db, doc: SyllabusDocument, market: MarketModel, job_field: str, entr
                         "readiness": round(100 * ready, 1),
                         "covered": [s["skill"] for s in b["top_skills"] if cov_score.get(s["skill"], 0) > 0],
                         "missing": [s["skill"] for s in b["top_skills"] if cov_score.get(s["skill"], 0) == 0]})
+    # Target career readiness / job eligibility per industry role
+    career_readiness = []
+    for r_name, top_skills in getattr(market, "role_top_skills", {}).items():
+        if not top_skills:
+            continue
+        covered = [s for s in top_skills if s in coverage]
+        missing = [s for s in top_skills if s not in coverage]
+        ready_pct = round(100 * sum(cov_score.get(s, 0) for s in top_skills) / (len(top_skills) * 100))
+        career_readiness.append({
+            "role": r_name,
+            "readiness_pct": ready_pct,
+            "covered_skills": covered,
+            "missing_skills": missing,
+            "total_core_skills": len(top_skills),
+        })
+    career_readiness.sort(key=lambda x: -x["readiness_pct"])
     counts = Counter(s["status_key"] for s in skills)
     partly = counts.get("partially_covered", 0) + counts.get("underemphasized", 0)
     return {
@@ -239,6 +255,7 @@ def compare(db, doc: SyllabusDocument, market: MarketModel, job_field: str, entr
         "market": {"postings_compared": n, "postings": market.n, "period": market.period},
         "skills": sorted(skills, key=lambda x: -x["demand_pct"]),
         "recommendations": recs, "courses": courses, "roles": roles, "bundles": bundles,
+        "career_readiness": career_readiness,
         "models": {
             "role_classifier": {"algorithm": m["role_classifier"]["best_model"],
                                 "accuracy": m["role_classifier"]["models"][m["role_classifier"]["best_model"]]["accuracy"]},

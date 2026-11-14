@@ -2,7 +2,7 @@ import { ArrowLeft, BrainCircuit, Briefcase, CheckCircle2, Circle, FlaskConical,
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api, errorMessage } from "../api/client";
-import type { Analysis, Recommendation, SkillRow } from "../api/types";
+import type { Analysis, CareerReadinessRole, Market, Recommendation, SkillRow } from "../api/types";
 import Plot from "../components/Plot";
 import { Button, Card, ErrorState, STATUS_ORDER, STATUS_STYLE, Spinner, StatusBadge, cx } from "../components/ui";
 import { useAsync } from "../components/useAsync";
@@ -25,7 +25,7 @@ function Progress({ a }: { a: Analysis }) {
             <li key={p.key} className="flex items-center gap-3 text-sm">
               {state === "done" ? <CheckCircle2 className="h-5 w-5 text-teal-600" aria-hidden />
                 : state === "now" ? <Loader2 className="h-5 w-5 animate-spin text-brand-600" aria-hidden />
-                : <Circle className="h-5 w-5 text-ink-200" aria-hidden />}
+                  : <Circle className="h-5 w-5 text-ink-200" aria-hidden />}
               <span className={state === "todo" ? "text-ink-500" : "text-ink-900"}>{p.label}</span>
             </li>
           );
@@ -231,7 +231,215 @@ function SkillsTable({ skills }: { skills: SkillRow[] }) {
   );
 }
 
-function Result({ a }: { a: Analysis }) {
+function TargetCohortSelector({
+  analysis,
+  onRecompare,
+  loading,
+}: {
+  analysis: Analysis;
+  onRecompare: (job_field: string, entry_level: boolean) => Promise<void>;
+  loading: boolean;
+}) {
+  const market = useAsync(() => api.get<Market>("/api/market"), []);
+  const options = market.data?.job_fields ?? [
+    { value: "it", label: "All Software & IT jobs", postings: 0 },
+    { value: "all", label: "All jobs (any industry)", postings: 0 },
+  ];
+
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-ink-200 bg-white p-3.5 shadow-sm print:hidden">
+      <div className="flex flex-wrap items-center gap-3">
+        <label htmlFor="role-select" className="text-xs font-semibold uppercase tracking-wider text-ink-500">
+          Target industry cohort:
+        </label>
+        <select
+          id="role-select"
+          disabled={loading}
+          value={analysis.job_field}
+          onChange={(e) => onRecompare(e.target.value, analysis.entry_level)}
+          className="rounded-md border border-ink-200 bg-ink-50 px-3 py-1.5 text-sm font-medium text-ink-900 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 disabled:opacity-50"
+        >
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label} {opt.postings ? `(${opt.postings.toLocaleString("en-IN")} jobs)` : ""}
+            </option>
+          ))}
+        </select>
+
+        <label className="inline-flex cursor-pointer items-center gap-2 text-sm text-ink-700">
+          <input
+            type="checkbox"
+            disabled={loading}
+            checked={analysis.entry_level}
+            onChange={(e) => onRecompare(analysis.job_field, e.target.checked)}
+            className="h-4 w-4 rounded border-ink-300 text-brand-600 focus:ring-brand-500 disabled:opacity-50"
+          />
+          <span>Entry-level & freshers (0–2 yrs exp)</span>
+        </label>
+      </div>
+
+      <div className="flex items-center gap-2 text-xs text-ink-500">
+        {loading ? (
+          <span className="inline-flex items-center gap-1.5 font-medium text-brand-600">
+            <Loader2 className="h-4 w-4 animate-spin" /> Recalculating comparison…
+          </span>
+        ) : (
+          <span>
+            Comparing <b>{analysis.market?.postings_compared?.toLocaleString("en-IN") ?? 0}</b> postings
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function CareerReadinessScorecard({
+  roles,
+  currentRole,
+  onSelectRole,
+  loading,
+}: {
+  roles: CareerReadinessRole[];
+  currentRole: string;
+  onSelectRole: (role: string) => void;
+  loading: boolean;
+}) {
+  if (!roles || roles.length === 0) return null;
+
+  return (
+    <Card
+      title={
+        <span className="inline-flex items-center gap-1.5">
+          <Briefcase className="h-4 w-4 text-brand-600" />
+          Target Career Pathways & Placement Eligibility
+        </span>
+      }
+      subtitle="How well this curriculum qualifies graduates for industry job roles, and the exact skills needed to bridge the gap"
+    >
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {roles.map((r) => {
+          const isSelected = currentRole === r.role;
+          const tone =
+            r.readiness_pct >= 70
+              ? { bar: "bg-teal-600", text: "text-teal-700", badge: "bg-teal-50 text-teal-700 ring-teal-200", label: "Career Ready" }
+              : r.readiness_pct >= 40
+              ? { bar: "bg-amber-500", text: "text-amber-800", badge: "bg-amber-50 text-amber-800 ring-amber-200", label: "Moderate Gap" }
+              : { bar: "bg-red-500", text: "text-red-700", badge: "bg-red-50 text-red-700 ring-red-200", label: "Needs Bridging" };
+
+          return (
+            <div
+              key={r.role}
+              className={cx(
+                "flex flex-col justify-between rounded-lg border p-4 transition-all print:break-inside-avoid",
+                isSelected
+                  ? "border-brand-500 bg-brand-50/30 ring-2 ring-brand-500/20"
+                  : "border-ink-200 bg-white hover:border-ink-300"
+              )}
+            >
+              <div>
+                <div className="flex items-start justify-between gap-2">
+                  <h4 className="text-sm font-semibold text-ink-900 leading-snug">{r.role}</h4>
+                  <span className={cx("shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ring-1 ring-inset", tone.badge)}>
+                    {r.readiness_pct}%
+                  </span>
+                </div>
+
+                <div className="mt-2.5">
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-ink-100">
+                    <div
+                      className={cx("h-full transition-all duration-500", tone.bar)}
+                      style={{ width: `${Math.min(100, Math.max(0, r.readiness_pct))}%` }}
+                    />
+                  </div>
+                  <div className="mt-1 flex justify-between text-[11px] text-ink-500">
+                    <span>{tone.label}</span>
+                    <span>{r.covered_skills.length} of {r.total_core_skills} core skills</span>
+                  </div>
+                </div>
+
+                {r.covered_skills.length > 0 && (
+                  <div className="mt-3">
+                    <div className="text-[11px] font-semibold uppercase tracking-wider text-teal-700">Covered in syllabus:</div>
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {r.covered_skills.slice(0, 6).map((sk) => (
+                        <span key={sk} className="inline-flex items-center gap-0.5 rounded bg-teal-50 px-1.5 py-0.5 text-[11px] font-medium text-teal-800 ring-1 ring-inset ring-teal-200/50">
+                          <CheckCircle2 className="h-3 w-3 text-teal-600" />
+                          {sk}
+                        </span>
+                      ))}
+                      {r.covered_skills.length > 6 && (
+                        <span className="text-[11px] text-ink-400">+{r.covered_skills.length - 6} more</span>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {r.missing_skills.length > 0 && (
+                  <div className="mt-2.5">
+                    <div className="text-[11px] font-semibold uppercase tracking-wider text-red-700">Missing skills to add:</div>
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {r.missing_skills.slice(0, 5).map((sk) => (
+                        <span key={sk} className="rounded bg-red-50 px-1.5 py-0.5 text-[11px] font-medium text-red-700 ring-1 ring-inset ring-red-200/50">
+                          + {sk}
+                        </span>
+                      ))}
+                      {r.missing_skills.length > 5 && (
+                        <span className="text-[11px] text-ink-400">+{r.missing_skills.length - 5} more</span>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-ink-100 print:hidden">
+                {isSelected ? (
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-brand-700">
+                    <CheckCircle2 className="h-3.5 w-3.5" /> Currently comparing this cohort
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={loading}
+                    onClick={() => onSelectRole(r.role)}
+                    className="inline-flex items-center text-xs font-medium text-brand-600 hover:text-brand-800 disabled:opacity-50"
+                  >
+                    Compare full syllabus against this role →
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </Card>
+  );
+}
+
+function Result({ a: initialAnalysis }: { a: Analysis }) {
+  const [a, setAnalysis] = useState<Analysis>(initialAnalysis);
+  const [recomparing, setRecomparing] = useState(false);
+  const [recompareError, setRecompareError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setAnalysis(initialAnalysis);
+  }, [initialAnalysis]);
+
+  const handleRecompare = async (field: string, entry: boolean) => {
+    setRecomparing(true);
+    setRecompareError(null);
+    try {
+      const updated = await api.post<Analysis>(`/api/analyses/${a.id}/recompare`, {
+        job_field: field,
+        entry_level: entry,
+      });
+      setAnalysis(updated);
+    } catch (e) {
+      setRecompareError(errorMessage(e));
+    } finally {
+      setRecomparing(false);
+    }
+  };
+
   const s = a.summary!;
   const charts = useCharts(a);
   const recs = a.recommendations ?? [];
@@ -252,6 +460,14 @@ function Result({ a }: { a: Analysis }) {
         </div>
       </div>
 
+      <TargetCohortSelector
+        analysis={a}
+        onRecompare={handleRecompare}
+        loading={recomparing}
+      />
+
+      {recompareError && <ErrorState message={recompareError} />}
+
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Stat label="Industry match" value={`${s.match_pct}%`} hint={`of the ${s.industry_skills_compared} most requested skills`} tone="text-brand-700" />
         <Stat label="Well covered" value={s.well_covered} hint="skills taught at the level industry asks" tone="text-teal-700" />
@@ -260,6 +476,13 @@ function Result({ a }: { a: Analysis }) {
       </div>
 
       {a.warnings?.map((w) => <ErrorState key={w} message={w} />)}
+
+      <CareerReadinessScorecard
+        roles={a.career_readiness ?? []}
+        currentRole={a.job_field}
+        onSelectRole={(role) => handleRecompare(role, a.entry_level)}
+        loading={recomparing}
+      />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card title={<span className="inline-flex items-center gap-1.5"><BrainCircuit className="h-4 w-4 text-brand-600" />Job roles this syllabus prepares for</span>}

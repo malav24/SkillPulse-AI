@@ -84,6 +84,8 @@ def test_full_analysis_uses_the_ml_models_and_is_fast(client, market):
     assert a["roles"][0]["role"] == "Data Scientist / ML Engineer"              # MODEL 1 on an ML syllabus
     assert all("role" in c for c in a["courses"])
     assert a["bundles"] and all(0 <= b["readiness"] <= 100 for b in a["bundles"])   # MODEL 3b
+    assert a["career_readiness"] and len(a["career_readiness"]) > 0                  # Option 1: career eligibility
+    assert all("readiness_pct" in cr and "covered_skills" in cr for cr in a["career_readiness"])
     assert a["models"]["role_classifier"]["algorithm"]
     assert s["match_pct"] == round(100 * (s["well_covered"] + 0.5 * s["partly_covered"]) / s["industry_skills_compared"])
     hist = client.get("/api/analyses").json()
@@ -156,3 +158,18 @@ def test_migrations_upgrade_and_downgrade(tmp_path):
     cfg.set_main_option("sqlalchemy.url", url)
     command.downgrade(cfg, "base")
     assert set(inspect(create_engine(url)).get_table_names()) <= {"alembic_version"}
+
+
+def test_recompare_changes_target_role_instantly(client, market):
+    data = unique_pdf(FIXTURES / "sample_syllabus.pdf")
+    a = _wait(client, _upload(client, data).json()["id"])
+    assert a["job_field"] == "it"
+    initial_compared = a["market"]["postings_compared"]
+
+    rec = client.post(f"/api/analyses/{a['id']}/recompare",
+                      json={"job_field": "Data Scientist / ML Engineer", "entry_level": False})
+    assert rec.status_code == 200, rec.text
+    updated = rec.json()
+    assert updated["job_field"] == "Data Scientist / ML Engineer"
+    assert updated["market"]["postings_compared"] < initial_compared
+    assert "career_readiness" in updated and len(updated["career_readiness"]) > 0

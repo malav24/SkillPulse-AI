@@ -9,10 +9,21 @@ export class ApiError extends Error {
   }
 }
 
-async function request<T>(method: string, path: string, form?: FormData): Promise<T> {
+async function request<T>(method: string, path: string, body?: FormData | unknown): Promise<T> {
   let res: Response;
+  const isForm = typeof FormData !== "undefined" && body instanceof FormData;
+  const headers: Record<string, string> = {};
+  let reqBody: BodyInit | undefined;
+
+  if (isForm) {
+    reqBody = body as FormData;
+  } else if (body !== undefined && body !== null) {
+    headers["Content-Type"] = "application/json";
+    reqBody = JSON.stringify(body);
+  }
+
   try {
-    res = await fetch(`${BASE}${path}`, { method, body: form });
+    res = await fetch(`${BASE}${path}`, { method, headers, body: reqBody });
   } catch {
     throw new ApiError(0, "Cannot reach the SkillPulse server. Is the backend running on port 8000?");
   }
@@ -33,7 +44,7 @@ async function request<T>(method: string, path: string, form?: FormData): Promis
 
 export const api = {
   get: <T>(path: string) => request<T>("GET", path),
-  post: <T>(path: string, form?: FormData) => request<T>("POST", path, form),
+  post: <T>(path: string, body?: FormData | unknown) => request<T>("POST", path, body),
   del: (path: string) => request<void>("DELETE", path),
 };
 

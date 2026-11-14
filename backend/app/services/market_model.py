@@ -52,6 +52,15 @@ class MarketModel:
         years = self.year[self.year > 0]
         self.period = f"{years.min()}–{years.max()}" if len(years) and years.min() != years.max() else (
             str(years.min()) if len(years) else None)
+        self.role_top_skills: dict[str, list[str]] = {}
+        for r_name in self.roles:
+            if r_name == OTHER_ROLE:
+                continue
+            r_idx = self.roles.index(r_name)
+            dem = self.demand(self.role == r_idx)
+            cand = sorted([(s, d) for s, d in dem["skills"].items() if d["jobs"] >= 5],
+                          key=lambda x: -x[1]["weighted_share"])[:10]
+            self.role_top_skills[r_name] = [s for s, _ in cand]
         log.info("market model loaded: %s postings, %s skills, %s rules, %s bundles",
                  f"{self.n:,}", len(self.skills), len(self.rules), len(self.bundles))
 

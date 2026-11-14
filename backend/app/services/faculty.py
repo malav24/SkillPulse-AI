@@ -246,6 +246,29 @@ def analysis_brief(a: FacultyAnalysis) -> dict:
 def analysis_result(db, a: FacultyAnalysis, full: bool = True) -> dict:
     out = analysis_brief(a)
     if a.status == "done" and a.result:
-        res = json.loads(a.result) if isinstance(a.result, str) else a.result
+        res = json.loads(a.result) if isinstance(a.result, str) else dict(a.result)
+        if full and "career_readiness" not in res and a.document:
+            from .comparison import coverage_by_skill
+            cov = coverage_by_skill(db, a.document)
+            cov_score = {k: v["score"] for k, v in cov.items()}
+            ok, _ = market_ready()
+            if ok:
+                m = get_market()
+                cr = []
+                for r_name, top_skills in getattr(m, "role_top_skills", {}).items():
+                    if not top_skills:
+                        continue
+                    covered = [s for s in top_skills if s in cov]
+                    missing = [s for s in top_skills if s not in cov]
+                    ready_pct = round(100 * sum(cov_score.get(s, 0) for s in top_skills) / (len(top_skills) * 100))
+                    cr.append({
+                        "role": r_name,
+                        "readiness_pct": ready_pct,
+                        "covered_skills": covered,
+                        "missing_skills": missing,
+                        "total_core_skills": len(top_skills),
+                    })
+                cr.sort(key=lambda x: -x["readiness_pct"])
+                res["career_readiness"] = cr
         out.update(res if full else {"summary": res.get("summary")})
     return out
