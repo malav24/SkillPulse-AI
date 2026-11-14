@@ -243,7 +243,7 @@ function Result({ a }: { a: Analysis }) {
           <h1 className="font-serif text-2xl font-semibold text-ink-900 sm:text-3xl">{a.course_name}</h1>
           <p className="mt-1 text-sm text-ink-500">
             {[a.institution, a.filename, `${s.pages} pages`].filter(Boolean).join(" · ")}
-            <br />Compared with {a.market?.postings_compared.toLocaleString("en-IN")} real job postings ({a.job_field_label}{a.market?.period ? `, ${a.market.period}` : ""}).
+            <br />Compared with {a.market?.postings_compared?.toLocaleString("en-IN") ?? 0} real job postings ({a.job_field_label}{a.market?.period ? `, ${a.market.period}` : ""}).
           </p>
         </div>
         <div className="flex gap-2 print:hidden">

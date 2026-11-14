@@ -192,7 +192,9 @@ def compare(db, doc: SyllabusDocument, market: MarketModel, job_field: str, entr
         if len(recs) == 12:
             break
     rank = {"High": 0, "Medium": 1, "Low": 2}
-    recs.sort(key=lambda x: (rank[x["priority"]], -x.pop("_p")))
+    recs.sort(key=lambda x: (rank[x["priority"]], -x["_p"]))
+    for _r in recs:
+        _r.pop("_p", None)
     m = market.metrics
     svm1 = m["role_classifier"]["best_model"]
     svm2 = m["requirement_classifier"]["best_model"]

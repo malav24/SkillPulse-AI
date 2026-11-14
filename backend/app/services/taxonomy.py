@@ -93,11 +93,17 @@ def get_matchers(db: Session) -> tuple[TaxonomyMatcher, FuzzyMatcher, SemanticMa
     with _lock:
         if _cache.get("version") == _version:
             return _cache["matcher"], _cache["fuzzy"], _cache["semantic"]
+        # Snapshot the version we're about to build for so we can detect a concurrent invalidation.
         version = _version
+
+    # Build matchers outside the lock (can be slow on first call).
     entries = _entries(db)
     matcher = TaxonomyMatcher(entries)
     fuzzy = FuzzyMatcher(entries)
     semantic = SemanticMatcher.load(s.semantic_model, entries, s.semantic_enabled)
+
     with _lock:
-        _cache.update(version=version, matcher=matcher, fuzzy=fuzzy, semantic=semantic)
-    return matcher, fuzzy, semantic
+        # Only commit if nobody invalidated the taxonomy while we were building.
+        if _cache.get("version") != version:
+            _cache.update(version=version, matcher=matcher, fuzzy=fuzzy, semantic=semantic)
+        return _cache["matcher"], _cache["fuzzy"], _cache["semantic"]

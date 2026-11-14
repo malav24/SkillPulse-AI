@@ -54,6 +54,10 @@ def market_status() -> dict:
 
 # --- Analyses ------------------------------------------------------------------------------------------------
 # One background worker does all heavy work in order (SQLite allows a single writer at a time).
+# NOTE: SkillPulse AI uses an in-process queue (_jobs) and SQLite in WAL mode.
+# It is designed to run as a single process (workers=1). Running with multiple worker processes
+# (e.g. uvicorn --workers N or gunicorn -w N) isolates queues per process and can cause
+# SQLite database lock collisions. Scale-out deployments require a shared broker and PostgreSQL.
 _jobs: "queue.Queue[tuple[str, int]]" = queue.Queue()
 _worker_started = False
 _worker_lock = threading.Lock()

@@ -99,7 +99,9 @@ class MarketModel:
         return {"n": n, "skills": out}
 
     def example_titles(self, mask: np.ndarray, skill: str, k: int = 3) -> list[str]:
-        j = self.skill_index[skill]
+        j = self.skill_index.get(skill)
+        if j is None:
+            return []
         col = self.levels[:, j]
         rows = col.indices[mask[col.indices]]
         counts = Counter(self.title[i].lower() for i in rows[:20000])
@@ -114,7 +116,10 @@ class MarketModel:
 
     def skill_role(self, mask: np.ndarray, skill: str) -> dict | None:
         """Which job role (as labelled by MODEL 1) asks for this skill most, among the selected postings."""
-        col = self.levels[:, self.skill_index[skill]]
+        j = self.skill_index.get(skill)
+        if j is None:
+            return None
+        col = self.levels[:, j]
         rows = col.indices[mask[col.indices]]
         other = self.roles.index(OTHER_ROLE)
         r = self.role[rows]

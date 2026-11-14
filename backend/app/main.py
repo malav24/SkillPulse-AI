@@ -46,6 +46,15 @@ def bootstrap() -> None:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    import os
+    concurrency = os.environ.get("WEB_CONCURRENCY") or os.environ.get("UVICORN_WORKERS")
+    if concurrency and concurrency.isdigit() and int(concurrency) > 1:
+        log.warning(
+            "WEB_CONCURRENCY=%s detected. SkillPulse AI uses an in-process background worker queue and SQLite. "
+            "Running multiple worker processes is not supported and will lead to isolated queues and SQLite lock "
+            "collisions. Please run with a single worker process.",
+            concurrency,
+        )
     s = get_settings()
     Path(s.upload_dir).mkdir(parents=True, exist_ok=True)
     if s.auto_migrate:

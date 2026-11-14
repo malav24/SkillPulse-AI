@@ -3,12 +3,12 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
-from sqlalchemy import select, text
+from sqlalchemy import func, select, text
 from sqlalchemy.orm import Session
 
 from ..config import get_settings
 from ..database import get_db
-from ..models import FacultyAnalysis
+from ..models import FacultyAnalysis, SyllabusDocument
 from ..services import faculty
 from ..services.pdf_processing import PDFValidationError
 
@@ -99,5 +99,20 @@ def delete(analysis_id: int, db: Session = Depends(get_db)):
     a = _get(db, analysis_id)
     if a.status in ("queued", "processing"):
         raise HTTPException(409, "Wait until the analysis has finished")
+    doc_id = a.document_id
     db.delete(a)
     db.commit()
+
+    if doc_id:
+        remaining = db.scalar(
+            select(func.count()).select_from(FacultyAnalysis).where(FacultyAnalysis.document_id == doc_id)
+        )
+        if not remaining:
+            doc = db.get(SyllabusDocument, doc_id)
+            if doc:
+                stored = doc.stored_path
+                db.delete(doc)
+                db.commit()
+                if stored:
+                    from ..storage import remove_files
+                    remove_files([stored])
